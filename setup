@@ -15,3 +15,9 @@ ln -sf "$PWD/.bashrc" "$HOME"/.bashrc
 ln -sf "$PWD/.inputrc" "$HOME"/.inputrc
 ln -sf "$PWD/.tmux.conf" "$HOME"/.tmux.conf
 ln -sf "$PWD/nvim" "$XDG_CONFIG_HOME"/nvim
+
+# fedora packages
+# sudo dnf install gcc libstdc++-devel unzip ripgrep fd
+
+# ubuntu packages
+sudo apt install gcc libstdc++-devel unzip ripgrep fd
