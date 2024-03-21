@@ -15,3 +15,6 @@ startup_mode = "Maximized"
 [window.padding]
 x = 7
 y = 7
+
+[colors.cursor]
+cursor = "0xebdbb2"
