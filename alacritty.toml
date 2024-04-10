@@ -13,8 +13,8 @@ decorations = "none"
 startup_mode = "Maximized"
 
 [window.padding]
-x = 7
-y = 7
+x = 10
+y = 10
 
 [colors.cursor]
 cursor = "0xebdbb2"
