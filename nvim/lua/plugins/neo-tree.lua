@@ -29,6 +29,7 @@ return {
         end,
       },
       window = {
+        width = 50,
         mappings = {
           h = "parent_or_close",
           l = "child_or_open",
