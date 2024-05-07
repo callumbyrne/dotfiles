@@ -5,6 +5,9 @@ import = ["~/.config/alacritty/themes/themes/gruvbox_dark.toml"]
 [font]
 size = 16
 
+[font.offset]
+y = 4
+
 [font.normal]
 family = "FiraCode Nerd Font"
 style = "Regular"
