@@ -7,6 +7,10 @@ local map = vim.keymap.set
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
 
+-- better indenting
+map("v", "<", "<gv")
+map("v", ">", ">gv")
+
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 
 -- Resize window using <ctrl> arrow keys
