@@ -37,6 +37,9 @@ export SECOND_BRAIN="$HOME/second-brain"
 
 export PATH="$SCRIPTS:$HOME/.local/bin:$PATH"
 
+export NODE_HOME="$HOME/.nvm/versions/node/v18.12.0"
+export PATH="$NODE_HOME/bin:$PATH"
+
 export JAVA_HOME=/usr/lib/jvm/jdk-14.0.2
 export PATH=$JAVA_HOME/bin:$PATH
 
