@@ -8,6 +8,7 @@ local nomap = vim.keymap.del
 nomap("n", "<tab>")
 nomap("n", "<leader>b")
 nomap("n", "<leader>x")
+nomap("n", "<leader>ds")
 
 -- Add mappings
 local map = vim.keymap.set
@@ -18,11 +19,16 @@ wk.register {
   ["<leader>"] = {
     q = { name = "+session" },
     b = { name = "+buffer" },
+    g = { name = "+git" },
+    d = { name = "+debug" }
   },
 }
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
+
+-- Use jq to format JSON
+map('n', '<leader>jq', ':%!jq .<cr>', { desc = 'Format current buffer using JQ' })
 
 -- buffers
 map("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
@@ -77,6 +83,12 @@ map("n", "<leader>qd", function() require("persistence").stop() end, { desc = "D
 
 -- neogit
 map("n", "<leader>gs", "<cmd>Neogit<cr>", { desc = 'Git status' })
-map("n", "<leader>gc", "<cmd>Neogit commit<cr>", { desc = 'Git commit' })
 map("n", "<leader>gp", "<cmd>Neogit pull<cr>", { desc = 'Git pull' })
-map("n", "<leader>gP", "<cmd>Neogit pull<cr>", { desc = 'Git push' })
+
+-- trouble
+map("n", "<leader>xx", "<cmd>TroubleToggle<cr>", { silent = true, noremap = true, desc = 'Toggle Trouble' })
+map("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", { silent = true, noremap = true, desc = 'Workspace Diagnostics' })
+map("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", { silent = true, noremap = true, desc = 'Document Diagnostics' })
+map("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>", { silent = true, noremap = true, desc = 'Local List' })
+map("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", { silent = true, noremap = true, desc = 'Quickfix Diagnostics' })
+map("n", "gR", "<cmd>TroubleToggle lsp_references<cr>", { silent = true, noremap = true, desc = 'LSP References' })
