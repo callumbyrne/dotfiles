@@ -7,6 +7,15 @@ return {
         lua = { "stylua" },
         css = { "prettier" },
         html = { "prettier" },
+        javascript = { "prettier" },
+        javascriptreact = { "prettier" },
+        typescript = { "prettier" },
+        typescriptreact = { "prettier" },
+        json = { "prettier" },
+        jsonc = { "prettier" },
+        yaml = { "prettier" },
+        markdown = { "prettier" },
+        ["markdown.mdx"] = { "prettier" },
       },
 
       format_on_save = {
