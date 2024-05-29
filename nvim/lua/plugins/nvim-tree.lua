@@ -4,5 +4,8 @@ return {
     view = {
       width = 50,
     },
+    git = {
+      ignore = false,
+    },
   },
 }
