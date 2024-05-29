@@ -8,7 +8,6 @@ local nomap = vim.keymap.del
 nomap("n", "<tab>")
 nomap("n", "<leader>b")
 nomap("n", "<leader>x")
-nomap("n", "<leader>ds")
 
 -- Add mappings
 local map = vim.keymap.set
