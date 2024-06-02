@@ -19,7 +19,8 @@ wk.register {
     q = { name = "+session" },
     b = { name = "+buffer" },
     g = { name = "+git" },
-    d = { name = "+debug" }
+    d = { name = "+debug" },
+    a = { name = "+ai" }
   },
 }
 
@@ -91,3 +92,7 @@ map("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", { silent =
 map("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>", { silent = true, noremap = true, desc = 'Local List' })
 map("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", { silent = true, noremap = true, desc = 'Quickfix Diagnostics' })
 map("n", "gR", "<cmd>TroubleToggle lsp_references<cr>", { silent = true, noremap = true, desc = 'LSP References' })
+
+-- enable/disable copilot
+map('n', '<leader>ae', '<cmd>Copilot enable<CR>', { desc = 'Enable [Copilot]' })
+map('n', '<leader>ad', '<cmd>Copilot disable<CR>', { desc = 'Disable [Copilot]' })
