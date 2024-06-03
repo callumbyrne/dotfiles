@@ -9,6 +9,24 @@ nomap("n", "<tab>")
 nomap("n", "<leader>b")
 nomap("n", "<leader>x")
 
+-- disable terminal mappings
+nomap("n", "<leader>h")
+nomap("n", "<leader>v")
+
+-- disable default telescope mappings
+nomap("n", "<leader>fw")
+nomap("n", "<leader>fb")
+nomap("n", "<leader>fh")
+nomap("n", "<leader>ma")
+nomap("n", "<leader>fo")
+nomap("n", "<leader>fz")
+nomap("n", "<leader>cm")
+nomap("n", "<leader>gt")
+nomap("n", "<leader>pt")
+nomap("n", "<leader>th")
+nomap("n", "<leader>ff")
+nomap("n", "<leader>fa")
+
 -- Add mappings
 local map = vim.keymap.set
 local wk = require "which-key"
@@ -16,19 +34,44 @@ local wk = require "which-key"
 -- WhichKey
 wk.register {
   ["<leader>"] = {
-    q = { name = "+session" },
+    t = { name = "+telescope" },
+    s = { name = "+session" },
     b = { name = "+buffer" },
     g = { name = "+git" },
     d = { name = "+debug" },
-    a = { name = "+ai" }
+    a = { name = "+ai" },
+    x = { name = "+trouble" },
   },
 }
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
+-- Keeping the cursor centered.
+map('n', '<C-d>', '<C-d>zz', { desc = 'Scroll downwards' })
+map('n', '<C-u>', '<C-u>zz', { desc = 'Scroll upwards' })
+map('n', 'n', 'nzzzv', { desc = 'Next result' })
+map('n', 'N', 'Nzzzv', { desc = 'Previous result' })
 
 -- Use jq to format JSON
 map('n', '<leader>jq', ':%!jq .<cr>', { desc = 'Format current buffer using JQ' })
+
+-- telescope
+map("n", "<leader>tg", "<cmd>Telescope live_grep<CR>", { desc = "Grep search" })
+map("n", "<leader>tb", "<cmd>Telescope buffers<CR>", { desc = "Find buffers" })
+map("n", "<leader>tH", "<cmd>Telescope help_tags<CR>", { desc = "Help" })
+map("n", "<leader>tm", "<cmd>Telescope marks<CR>", { desc = "Find marks" })
+map("n", "<leader>tr", "<cmd>Telescope oldfiles<CR>", { desc = "Recently opened files" })
+map("n", "<leader>tf", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { desc = "Find in current buffer" })
+map("n", "<leader>tc", "<cmd>Telescope git_commits<CR>", { desc = "Telescope git commits" })
+map("n", "<leader>ts", "<cmd>Telescope git_status<CR>", { desc = "Telescope git status" })
+map("n", "<leader>th", "<cmd>Telescope themes<CR>", { desc = "Nvchad themes" })
+map("n", "<leader>tt", "<cmd>Telescope find_files<cr>", { desc = "Find files" })
+map(
+  "n",
+  "<leader>ta",
+  "<cmd>Telescope find_files follow=true no_ignore=true hidden=true<CR>",
+  { desc = "Find all files" }
+)
 
 -- buffers
 map("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
@@ -71,15 +114,14 @@ map("n", "<leader>e", function()
   end
 end, { desc = "nvimtree focus/open nvimtree (closes if open)" })
 
--- true-zen
-map("n", "<leader>tf", function() require("true-zen").focus() end, { desc = "Focus mode" })
--- zen-mode
-map("n", "<leader>ta", function() require("zen-mode").toggle() end, { desc = "Zen mode" })
+-- zen
+map("n", "<leader>hf", function() require("true-zen").focus() end, { desc = "Focus mode" })
+map("n", "<leader>ha", function() require("zen-mode").toggle() end, { desc = "Zen mode" })
 
 -- persistence
-map("n", "<leader>qs", function() require("persistence").load() end, { desc = "Restore Session" })
-map("n", "<leader>ql", function() require("persistence").load { last = true } end, { desc = "Restore Last Session" })
-map("n", "<leader>qd", function() require("persistence").stop() end, { desc = "Don't Save Current Session" })
+map("n", "<leader>ss", function() require("persistence").load() end, { desc = "Restore Session" })
+map("n", "<leader>sl", function() require("persistence").load { last = true } end, { desc = "Restore Last Session" })
+map("n", "<leader>sd", function() require("persistence").stop() end, { desc = "Don't Save Current Session" })
 
 -- neogit
 map("n", "<leader>gs", "<cmd>Neogit<cr>", { desc = 'Git status' })
