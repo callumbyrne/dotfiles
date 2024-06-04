@@ -52,7 +52,7 @@ return {
         "prettier",
         "typescript-language-server",
         "gopls",
-        "eslint_d",
+        "eslint-lsp",
       },
     },
   },
