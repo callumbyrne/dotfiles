@@ -18,6 +18,8 @@
   "lazy.nvim": { "branch": "main", "commit": "8f19915175395680808de529e4220da8dafc0759" },
   "mason-nvim-dap.nvim": { "branch": "main", "commit": "67210c0e775adec55de9826b038e8b62de554afc" },
   "mason.nvim": { "branch": "main", "commit": "49ff59aded1047a773670651cfa40e76e63c6377" },
+  "mini.ai": { "branch": "main", "commit": "7859b6344f5cee567a94f173859d25e20ba1a77e" },
+  "mini.surround": { "branch": "main", "commit": "27096c1a27324ee8f2044ea2adc77366d8a782de" },
   "neogit": { "branch": "master", "commit": "65840f12a8a8663743d75258e8ffc8f78fe37a53" },
   "nvim-autopairs": { "branch": "master", "commit": "c15de7e7981f1111642e7e53799e1211d4606cb9" },
   "nvim-cmp": { "branch": "main", "commit": "5260e5e8ecadaf13e6b82cf867a909f54e15fd07" },
