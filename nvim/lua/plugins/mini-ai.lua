@@ -1,8 +1,7 @@
 -- Better text objects.
 return {
   "echasnovski/mini.ai",
-  event = { "BufReadPre", "BufNewFile" },
-  dependencies = "nvim-treesitter-textobjects",
+  event = "BufReadPost",
   config = function()
     local miniai = require "mini.ai"
 

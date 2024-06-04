@@ -1,6 +1,6 @@
 return {
   "echasnovski/mini.surround",
-  event = { "BufReadPre", "BufNewFile" },
+  event = "BufReadPost",
   config = function()
     require("mini.surround").setup {
       n_lines = 50,
