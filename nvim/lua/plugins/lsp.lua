@@ -14,7 +14,6 @@ return {
         "cssls",
         "tsserver",
         "gopls",
-        "eslint",
       }
 
       -- lsps with default config
@@ -25,19 +24,6 @@ return {
           capabilities = capabilities,
         }
       end
-
-      -- eslint
-      -- lspconfig.eslint.setup {
-      --   on_attach = function(client, bufnr)
-      --     on_attach(client, bufnr)
-      --     vim.api.nvim_create_autocmd("BufWritePre", {
-      --       buffer = bufnr,
-      --       command = "EslintFixAll",
-      --     })
-      --   end,
-      --   on_init = on_init,
-      --   capabilities = capabilities,
-      -- }
     end,
   },
 
