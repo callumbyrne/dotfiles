@@ -1,7 +1,7 @@
 -- stylua: ignore start
 require "nvchad.mappings"
 
--- Disable mappings
+-- Disable mappings -----------------------------------------
 local nomap = vim.keymap.del
 
 -- to get ctrl-i to work
@@ -27,7 +27,7 @@ nomap("n", "<leader>th")
 nomap("n", "<leader>ff")
 nomap("n", "<leader>fa")
 
--- Add mappings
+-- Add mappings ---------------------------------------------
 local map = vim.keymap.set
 local wk = require "which-key"
 
@@ -46,6 +46,10 @@ wk.register {
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
+
+-- Line diagnostics
+map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
+
 -- Keeping the cursor centered.
 map('n', '<C-d>', '<C-d>zz', { desc = 'Scroll downwards' })
 map('n', '<C-u>', '<C-u>zz', { desc = 'Scroll upwards' })
@@ -133,7 +137,7 @@ map("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", { silent 
 map("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", { silent = true, noremap = true, desc = 'Document Diagnostics' })
 map("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>", { silent = true, noremap = true, desc = 'Local List' })
 map("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", { silent = true, noremap = true, desc = 'Quickfix Diagnostics' })
-map("n", "gR", "<cmd>TroubleToggle lsp_references<cr>", { silent = true, noremap = true, desc = 'LSP References' })
+map("n", "gR", "<cmd>TroubleToggle lsp_references<cr>", { silent = true, noremap = true, desc = 'LSP References [Trouble]' })
 
 -- enable/disable copilot
 map('n', '<leader>ae', '<cmd>Copilot enable<CR>', { desc = 'Enable [Copilot]' })
