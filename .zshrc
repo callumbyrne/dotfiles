@@ -46,6 +46,8 @@ export PATH=$JAVA_HOME/bin:$PATH
 export NVIM_INSTALL="/usr/local/bin/nvim-linux64"
 export PATH="$NVIM_INSTALL/bin:$PATH"
 
+export PATH=/usr/local/go/bin:$PATH
+
 # ~~~~~~~~~~~~~~~ History ~~~~~~~~~~~~~~~~~~~~~~~~
 
 export HISTFILE=~/.histfile
