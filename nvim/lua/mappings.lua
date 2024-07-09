@@ -132,13 +132,29 @@ map("n", "<leader>gs", "<cmd>Neogit<cr>", { desc = 'Git status' })
 map("n", "<leader>gp", "<cmd>Neogit pull<cr>", { desc = 'Git pull' })
 
 -- trouble
-map("n", "<leader>xx", "<cmd>TroubleToggle<cr>", { silent = true, noremap = true, desc = 'Toggle Trouble' })
-map("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", { silent = true, noremap = true, desc = 'Workspace Diagnostics' })
-map("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", { silent = true, noremap = true, desc = 'Document Diagnostics' })
-map("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>", { silent = true, noremap = true, desc = 'Local List' })
-map("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", { silent = true, noremap = true, desc = 'Quickfix Diagnostics' })
-map("n", "gR", "<cmd>TroubleToggle lsp_references<cr>", { silent = true, noremap = true, desc = 'LSP References [Trouble]' })
+map("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", { silent = true, noremap = true, desc = 'Diagnostics [Trouble]' })
+map("n", "<leader>xb", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", { silent = true, noremap = true, desc = 'Buffer Diagnostics [Trouble]' })
+map("n", "<leader>xl", "<cmd>Trouble loclist toggle<cr>", { silent = true, noremap = true, desc = 'Location List [Trouble]' })
+map("n", "<leader>xq", "<cmd>Trouble qflist toggle<cr>", { silent = true, noremap = true, desc = 'Quickfix list [Trouble]' })
+map("n", "<leader>xs", "<cmd>Trouble symbols toggle focus=false<cr>", { silent = true, noremap = true, desc = 'Symbols [Trouble]' })
+map("n", "gR", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", { silent = true, noremap = true, desc = 'LSP References [Trouble]' })
 
 -- enable/disable copilot
 map('n', '<leader>ae', '<cmd>Copilot enable<CR>', { desc = 'Enable [Copilot]' })
 map('n', '<leader>ad', '<cmd>Copilot disable<CR>', { desc = 'Disable [Copilot]' })
+
+-- diffview
+map("n", "<leader>gd", function ()
+  if next(require("diffview.lib").views) == nil then
+    vim.cmd "DiffviewOpen"
+  else
+    vim.cmd "DiffviewClose"
+  end
+end, { desc = "Git Diff [DiffView]" })
+map("n", "<leader>gh", function ()
+  if next(require("diffview.lib").views) == nil then
+    vim.cmd "DiffviewFileHistory %"
+  else
+    vim.cmd "DiffviewClose"
+  end
+end, { desc = "Git history [DiffView]" })
