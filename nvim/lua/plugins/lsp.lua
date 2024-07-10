@@ -24,6 +24,22 @@ return {
           capabilities = capabilities,
         }
       end
+
+      lspconfig.jsonls.setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        settings = {
+          json = {
+            validate = { enable = true },
+            format = { enable = true },
+          },
+        },
+        -- Lazy-load schemas.
+        on_new_config = function(config)
+          config.settings.json.schemas = config.settings.json.schemas or {}
+          vim.list_extend(config.settings.json.schemas, require("schemastore").json.schemas())
+        end,
+      }
     end,
   },
 
@@ -39,6 +55,7 @@ return {
         "typescript-language-server",
         "gopls",
         "eslint_d",
+        "json-lsp",
       },
     },
   },
