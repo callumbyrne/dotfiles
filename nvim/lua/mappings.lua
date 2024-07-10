@@ -78,9 +78,9 @@ map(
 )
 
 -- buffers
-map("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
-map("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 map("n", "<leader>bn", "<cmd>enew<CR>", { desc = "Buffer new" })
+map("n", "<S-h>", function() require("nvchad.tabufline").prev() end, { desc = "Prev Buffer" })
+map("n", "<S-l>", function() require("nvchad.tabufline").next() end, { desc = "Next Buffer" })
 map("n", "<leader>bd", function() require("nvchad.tabufline").close_buffer() end, { desc = "Close buffer" })
 map("n", "<leader>bD", function() require("nvchad.tabufline").closeAllBufs() end, { desc = "Close all buffers" })
 map("n", "<leader>bc", function() require("nvchad.tabufline").closeOtherBufs() end, { desc = "Close all buffers except current" })
@@ -132,17 +132,14 @@ map("n", "<leader>gs", "<cmd>Neogit<cr>", { desc = 'Git status' })
 map("n", "<leader>gp", "<cmd>Neogit pull<cr>", { desc = 'Git pull' })
 
 -- trouble
-map("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", { silent = true, noremap = true, desc = 'Diagnostics [Trouble]' })
+map("n", "<leader>xw", "<cmd>Trouble diagnostics toggle<cr>", { silent = true, noremap = true, desc = 'Workspace Diagnostics [Trouble]' })
 map("n", "<leader>xb", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", { silent = true, noremap = true, desc = 'Buffer Diagnostics [Trouble]' })
 map("n", "<leader>xs", "<cmd>Trouble symbols toggle focus=false<cr>", { silent = true, noremap = true, desc = 'Symbols [Trouble]' })
--- map("n", "gR", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", { silent = true, noremap = true, desc = 'LSP References [Trouble]' })
--- map("n", "<leader>xl", "<cmd>Trouble loclist toggle<cr>", { silent = true, noremap = true, desc = 'Location List [Trouble]' })
--- map("n", "<leader>xq", "<cmd>Trouble qflist toggle<cr>", { silent = true, noremap = true, desc = 'Quickfix list [Trouble]' })
 
 -- Toggle the quickfix/loclist window.
 -- When toggling these, ignore error messages and restore the cursor to the original window when opening the list.
 local silent_mods = { mods = { silent = true, emsg_silent = true } }
-vim.keymap.set('n', '<leader>xq', function()
+vim.keymap.set('n', '<leader>xx', function()
     if vim.fn.getqflist({ winid = 0 }).winid ~= 0 then
         vim.cmd.cclose(silent_mods)
     elseif #vim.fn.getqflist() > 0 then
@@ -164,11 +161,6 @@ vim.keymap.set('n', '<leader>xl', function()
         end
     end
 end, { desc = 'Toggle location list' })
--- ...and navigating through the items.
-vim.keymap.set('n', '[q', '<cmd>cprev<cr>zvzz', { desc = 'Previous quickfix item' })
-vim.keymap.set('n', ']q', '<cmd>cnext<cr>zvzz', { desc = 'Next quickfix item' })
-vim.keymap.set('n', '[l', '<cmd>lprev<cr>zvzz', { desc = 'Previous loclist item' })
-vim.keymap.set('n', ']l', '<cmd>lnext<cr>zvzz', { desc = 'Next loclist item' })
 
 -- enable/disable copilot
 map('n', '<leader>ae', '<cmd>Copilot enable<CR>', { desc = 'Enable [Copilot]' })
