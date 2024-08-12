@@ -24,6 +24,9 @@ return {
 
       -- other
       "go",
+      "gomod",
+      "gowork",
+      "gosum",
     },
   },
 }

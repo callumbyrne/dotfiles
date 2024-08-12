@@ -48,6 +48,8 @@ export PATH="$NVIM_INSTALL/bin:$PATH"
 
 export PATH=/usr/local/go/bin:$PATH
 
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
 # ~~~~~~~~~~~~~~~ History ~~~~~~~~~~~~~~~~~~~~~~~~
 
 export HISTFILE=~/.histfile

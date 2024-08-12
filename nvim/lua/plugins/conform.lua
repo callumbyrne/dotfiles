@@ -16,6 +16,7 @@ return {
         yaml = { "prettier" },
         markdown = { "prettier" },
         ["markdown.mdx"] = { "prettier" },
+        go = { "goimports", "gofumpt" },
       },
 
       format_on_save = function(bufnr)
