@@ -64,6 +64,7 @@ alias v=nvim
 alias scripts='cd $SCRIPTS'
 alias dot='cd $REPOS/dotfiles'
 alias repos='cd $REPOS'
+alias re='cd $HOME/zunia-local-development-docker/repos'
 alias c="clear"
 
 # ls
