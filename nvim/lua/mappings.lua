@@ -70,6 +70,7 @@ map("n", "<leader>tc", "<cmd>Telescope git_commits<CR>", { desc = "Telescope git
 map("n", "<leader>ts", "<cmd>Telescope git_status<CR>", { desc = "Telescope git status" })
 map("n", "<leader>th", "<cmd>Telescope themes<CR>", { desc = "Nvchad themes" })
 map("n", "<leader>tt", "<cmd>Telescope find_files<cr>", { desc = "Find files" })
+map("n", "<leader>tw", "<cmd>Telescope grep_string<cr>", { desc = "Grep word" })
 map(
   "n",
   "<leader>ta",
@@ -109,22 +110,15 @@ map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move Up" })
 map("n", "<leader>sk", "<cmd>Telescope keymaps<cr>", { desc = "Key Maps" })
 
 -- nvimtree
-map("n", "<leader>e", function()
-  local api = require "nvim-tree.api"
-  if api.tree.is_visible() then
-    api.tree.close()
-  else
-    api.tree.focus()
-  end
-end, { desc = "nvimtree focus/open nvimtree (closes if open)" })
+map("n", "<leader>e", function() require("lua.utils").toggle_nvimtree() end, { desc = "nvimtree focus/open nvimtree (closes if open)" })
 
 -- zen
 map("n", "<leader>hf", function() require("true-zen").focus() end, { desc = "Focus mode" })
 map("n", "<leader>ha", function() require("zen-mode").toggle() end, { desc = "Zen mode" })
 
 -- persistence
-map("n", "<leader>ss", function() require("persistence").load() end, { desc = "Restore Session" })
-map("n", "<leader>sl", function() require("persistence").load { last = true } end, { desc = "Restore Last Session" })
+map("n", "<leader>ss", function() require("persistence").load(); require("lua.utils").toggle_nvimtree(); vim.api.nvim_command('wincmd l') end, { desc = "Restore Session" })
+map("n", "<leader>sl", function() require("persistence").load({ last = true }); require("lua.utils").toggle_nvimtree(); vim.api.nvim_command('wincmd l') end, { desc = "Restore Last Session" })
 map("n", "<leader>sd", function() require("persistence").stop() end, { desc = "Don't Save Current Session" })
 
 -- neogit
@@ -181,3 +175,6 @@ map("n", "<leader>gh", function ()
     vim.cmd "DiffviewClose"
   end
 end, { desc = "Git history [DiffView]" })
+
+-- lazygit
+map("n", "<leader>lg", "<cmd>LazyGit<cr>", { desc = "LazyGit" })
