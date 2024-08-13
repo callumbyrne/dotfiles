@@ -110,15 +110,15 @@ map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move Up" })
 map("n", "<leader>sk", "<cmd>Telescope keymaps<cr>", { desc = "Key Maps" })
 
 -- nvimtree
-map("n", "<leader>e", function() require("lua.utils").toggle_nvimtree() end, { desc = "nvimtree focus/open nvimtree (closes if open)" })
+map("n", "<leader>e", function() require("utils").toggle_nvimtree() end, { desc = "nvimtree focus/open nvimtree (closes if open)" })
 
 -- zen
 map("n", "<leader>hf", function() require("true-zen").focus() end, { desc = "Focus mode" })
 map("n", "<leader>ha", function() require("zen-mode").toggle() end, { desc = "Zen mode" })
 
 -- persistence
-map("n", "<leader>ss", function() require("persistence").load(); require("lua.utils").toggle_nvimtree(); vim.api.nvim_command('wincmd l') end, { desc = "Restore Session" })
-map("n", "<leader>sl", function() require("persistence").load({ last = true }); require("lua.utils").toggle_nvimtree(); vim.api.nvim_command('wincmd l') end, { desc = "Restore Last Session" })
+map("n", "<leader>ss", function() require("persistence").load(); require("utils").toggle_nvimtree(); vim.api.nvim_command('wincmd l') end, { desc = "Restore Session" })
+map("n", "<leader>sl", function() require("persistence").load({ last = true }); require("utils").toggle_nvimtree(); vim.api.nvim_command('wincmd l') end, { desc = "Restore Last Session" })
 map("n", "<leader>sd", function() require("persistence").stop() end, { desc = "Don't Save Current Session" })
 
 -- neogit
