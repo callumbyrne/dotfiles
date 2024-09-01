@@ -114,7 +114,7 @@ map("n", "<leader>e", function() require("utils").toggle_nvimtree() end, { desc 
 
 -- zen
 map("n", "<leader>hf", function() require("true-zen").focus() end, { desc = "Focus mode" })
-map("n", "<leader>ha", function() require("zen-mode").toggle() end, { desc = "Zen mode" })
+map("n", "<leader>hz", function() require("zen-mode").toggle() end, { desc = "Zen mode" })
 
 -- persistence
 map("n", "<leader>ss", function() require("persistence").load(); require("utils").toggle_nvimtree(); vim.api.nvim_command('wincmd l') end, { desc = "Restore Session" })
@@ -178,3 +178,12 @@ end, { desc = "Git history [DiffView]" })
 
 -- lazygit
 map("n", "<leader>lg", "<cmd>LazyGit<cr>", { desc = "LazyGit" })
+
+-- harpoon
+map("n", "<leader>ha", function() require("harpoon"):list():add() end, {desc = "Harpoon File"})
+map("n", "<leader>hh", function() require("harpoon").ui:toggle_quick_menu(require("harpoon"):list()) end, {desc = "Harpoon Menu"})
+
+map("n", "<C-f>1", function() require("harpoon"):list():select(1) end)
+map("n", "<C-f>2", function() require("harpoon"):list():select(2) end)
+map("n", "<C-f>3", function() require("harpoon"):list():select(3) end)
+map("n", "<C-f>4", function() require("harpoon"):list():select(4) end)
