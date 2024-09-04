@@ -32,17 +32,16 @@ local map = vim.keymap.set
 local wk = require "which-key"
 
 -- WhichKey
-wk.register {
-  ["<leader>"] = {
-    t = { name = "+telescope" },
-    s = { name = "+session" },
-    b = { name = "+buffer" },
-    g = { name = "+git" },
-    d = { name = "+debug" },
-    a = { name = "+ai" },
-    x = { name = "+trouble" },
-  },
+wk.add {
+  { "<leader>a", group = "ai" },
+  { "<leader>b", group = "buffer" },
+  { "<leader>d", group = "debug" },
+  { "<leader>g", group = "git" },
+  { "<leader>s", group = "session" },
+  { "<leader>t", group = "telescope" },
+  { "<leader>x", group = "trouble" },
 }
+
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")

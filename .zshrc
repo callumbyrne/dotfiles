@@ -10,6 +10,7 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 export NVM_LAZY_LOAD=true
+export NVM_LAZY_LOAD_EXTRA_COMMANDS=('nvim')
 export NVM_COMPLETION=true
 plugins=(zsh-nvm git)
 
@@ -37,8 +38,8 @@ export SECOND_BRAIN="$HOME/second-brain"
 
 export PATH="$SCRIPTS:$HOME/.local/bin:$PATH"
 
-export NODE_HOME="$HOME/.nvm/versions/node/v18.12.0"
-export PATH="$NODE_HOME/bin:$PATH"
+# export NODE_HOME="$HOME/.nvm/versions/node/v18.12.0"
+# export PATH="$NODE_HOME/bin:$PATH"
 
 export JAVA_HOME=/usr/lib/jvm/jdk-14.0.2
 export PATH=$JAVA_HOME/bin:$PATH
@@ -65,8 +66,7 @@ alias v=nvim
 # cd
 alias scripts='cd $SCRIPTS'
 alias dot='cd $REPOS/dotfiles'
-alias repos='cd $REPOS'
-alias re='cd $HOME/zunia-local-development-docker/repos'
+alias re='cd $REPOS'
 alias c="clear"
 
 # ls

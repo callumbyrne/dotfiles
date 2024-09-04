@@ -2,7 +2,6 @@
 
 # create directories
 export XDG_CONFIG_HOME="$HOME"/.config
-mkdir -p "$XDG_CONFIG_HOME"/bash
 mkdir -p "$XDG_CONFIG_HOME"/alacritty
 mkdir -p "$XDG_CONFIG_HOME"/alacritty/themes
 mkdir -p "$HOME"/second-brain
@@ -11,8 +10,6 @@ git clone https://github.com/alacritty/alacritty-theme "$XDG_CONFIG_HOME"/alacri
 
 # Symbolic links
 ln -sf "$PWD/alacritty.toml" "$XDG_CONFIG_HOME"/alacritty/alacritty.toml
-ln -sf "$PWD/.bash_profile" "$HOME"/.bash_profile
-ln -sf "$PWD/.bashrc" "$HOME"/.bashrc
 ln -sf "$PWD/.zshrc" "$HOME"/.zshrc
 ln -sf "$PWD/.inputrc" "$HOME"/.inputrc
 ln -sf "$PWD/.tmux.conf" "$HOME"/.tmux.conf
@@ -22,4 +19,4 @@ ln -sf "$PWD/nvim" "$XDG_CONFIG_HOME"/nvim
 # sudo dnf install gcc libstdc++-devel unzip ripgrep fd
 
 # ubuntu packages
-sudo apt install gcc libstdc++-devel unzip ripgrep fd
+# sudo apt install gcc libstdc++-devel unzip ripgrep fd
