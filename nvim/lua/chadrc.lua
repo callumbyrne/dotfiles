@@ -11,6 +11,23 @@ M.ui = {
     separator_style = "block",
   },
 
+  mason = {
+    pkgs = {
+      "lua-language-server",
+      "stylua",
+      "html-lsp",
+      "css-lsp",
+      "prettier",
+      "typescript-language-server",
+      "gopls",
+      "goimports",
+      "gofumpt",
+      "gomodifytags",
+      "eslint_d",
+      "json-lsp",
+    },
+  },
+
   -- hl_override = {
   -- 	Comment = { italic = true },
   -- 	["@comment"] = { italic = true },

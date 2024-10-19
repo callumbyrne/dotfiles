@@ -12,7 +12,7 @@ return {
       local servers = {
         "html",
         "cssls",
-        "tsserver",
+        "ts_ls",
         "gopls",
       }
 
@@ -41,25 +41,5 @@ return {
         end,
       }
     end,
-  },
-
-  {
-    "williamboman/mason.nvim",
-    opts = {
-      ensure_installed = {
-        "lua-language-server",
-        "stylua",
-        "html-lsp",
-        "css-lsp",
-        "prettier",
-        "typescript-language-server",
-        "gopls",
-        "goimports",
-        "gofumpt",
-        "gomodifytags",
-        "eslint_d",
-        "json-lsp",
-      },
-    },
   },
 }
