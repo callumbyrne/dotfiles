@@ -120,10 +120,6 @@ map("n", "<leader>ss", function() require("persistence").load(); require("utils"
 map("n", "<leader>sl", function() require("persistence").load({ last = true }); require("utils").toggle_nvimtree(); vim.api.nvim_command('wincmd l') end, { desc = "Restore Last Session" })
 map("n", "<leader>sd", function() require("persistence").stop() end, { desc = "Don't Save Current Session" })
 
--- neogit
-map("n", "<leader>gs", "<cmd>Neogit<cr>", { desc = 'Git status' })
-map("n", "<leader>gp", "<cmd>Neogit pull<cr>", { desc = 'Git pull' })
-
 -- trouble
 map("n", "<leader>xw", "<cmd>Trouble diagnostics toggle<cr>", { silent = true, noremap = true, desc = 'Workspace Diagnostics [Trouble]' })
 map("n", "<leader>xb", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", { silent = true, noremap = true, desc = 'Buffer Diagnostics [Trouble]' })
@@ -186,3 +182,8 @@ map("n", "<C-f>1", function() require("harpoon"):list():select(1) end)
 map("n", "<C-f>2", function() require("harpoon"):list():select(2) end)
 map("n", "<C-f>3", function() require("harpoon"):list():select(3) end)
 map("n", "<C-f>4", function() require("harpoon"):list():select(4) end)
+
+-- gitsigns
+map("n", "<leader>gb", function() require("gitsigns").blame_line() end, {desc = "Blame line"})
+map("n", "<leader>gp", function() require("gitsigns").preview_hunk() end, {desc = "Preview hunk"})
+map("n", "<leader>gr", function() require("gitsigns").reset_hunk() end, {desc = "Reset hunk"})
