@@ -11,9 +11,9 @@ autocmd("LspAttach", {
 })
 
 -- highlight on yank
-autocmd("TextYankPost", {
-  callback = function()
-    require("vim.highlight").on_yank { higroup = "Visual", timeout = 200 }
-  end,
-  desc = "Highlight when yanking",
-})
+-- autocmd("TextYankPost", {
+--   callback = function()
+--     require("vim.highlight").on_yank { higroup = "Visual", timeout = 200 }
+--   end,
+--   desc = "Highlight when yanking",
+-- })
