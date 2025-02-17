@@ -65,11 +65,10 @@ map("n", "<leader>tH", "<cmd>Telescope help_tags<CR>", { desc = "Help" })
 map("n", "<leader>tm", "<cmd>Telescope marks<CR>", { desc = "Find marks" })
 map("n", "<leader>tr", "<cmd>Telescope oldfiles<CR>", { desc = "Recently opened files" })
 map("n", "<leader>tf", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { desc = "Find in current buffer" })
-map("n", "<leader>tc", "<cmd>Telescope git_commits<CR>", { desc = "Telescope git commits" })
-map("n", "<leader>ts", "<cmd>Telescope git_status<CR>", { desc = "Telescope git status" })
 map("n", "<leader>th", "<cmd>Telescope themes<CR>", { desc = "Nvchad themes" })
 map("n", "<leader>tt", "<cmd>Telescope find_files<cr>", { desc = "Find files" })
 map("n", "<leader>tw", "<cmd>Telescope grep_string<cr>", { desc = "Grep word" })
+map("n", "<leader>ts", function() require("telescope.builtin").lsp_document_symbols({ symbols = { "class", "function", "method" }, symbol_width = 50 }) end, { desc = "Grep symbols" })
 map(
   "n",
   "<leader>ta",
