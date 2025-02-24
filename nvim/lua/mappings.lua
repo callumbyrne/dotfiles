@@ -43,7 +43,7 @@ wk.add {
 }
 
 
-map("n", ";", ":", { desc = "CMD enter command mode" })
+-- map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
 
 -- Line diagnostics
