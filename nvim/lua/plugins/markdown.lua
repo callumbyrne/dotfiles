@@ -1,5 +1,4 @@
 return {}
-
 -- return {
 --   {
 --     "MeanderingProgrammer/markdown.nvim", -- Markdown syntax highlighting
