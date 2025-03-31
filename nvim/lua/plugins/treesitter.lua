@@ -21,6 +21,7 @@ return {
       "javascript",
       "typescript",
       "tsx",
+      "templ",
 
       -- other
       "go",

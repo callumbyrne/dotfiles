@@ -5,10 +5,26 @@ return {
       local configs = require "nvchad.configs.lspconfig"
 
       local servers = {
-        html = {},
+        html = {
+          filetypes = { "html", "templ" },
+        },
         cssls = {},
         ts_ls = {},
         gopls = {},
+        templ = {},
+        htmx = {
+          filetypes = { "html", "templ" },
+        },
+        tailwindcss = {
+          filetypes = { "templ", "astro", "javascript", "typescript", "react" },
+          settings = {
+            tailwindCSS = {
+              includeLanguages = {
+                templ = "html",
+              },
+            },
+          },
+        },
 
         jsonls = {
           settings = {
