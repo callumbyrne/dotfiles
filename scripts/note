@@ -1,0 +1,72 @@
+#!/bin/bash
+# inbox-note - Create new inbox note with auto-incrementing number
+# Usage: inbox-note [optional-title]
+
+set -e
+
+# Configuration
+INBOX_DIR="${SECOND_BRAIN}/0_inbox"
+
+# Ensure directory exists
+mkdir -p "${INBOX_DIR}"
+
+# Function to get next available number
+get_next_number() {
+    local max_num=0
+    
+    # Find all untitled-*.md files and get the highest number
+    for file in "$INBOX_DIR"/untitled-*.md; do
+        if [[ -f "$file" ]]; then
+            # Extract number from filename
+            local num=$(basename "$file" | sed 's/untitled-\([0-9]*\)\.md/\1/')
+            if [[ "$num" =~ ^[0-9]+$ ]] && [[ $num -gt $max_num ]]; then
+                max_num=$num
+            fi
+        fi
+    done
+    
+    echo $((max_num + 1))
+}
+
+# Get the next number
+NEXT_NUM=$(get_next_number)
+
+# Set filename
+if [[ $# -eq 0 ]]; then
+    FILENAME="untitled-${NEXT_NUM}.md"
+    TITLE="Untitled ${NEXT_NUM}"
+else
+    # If title provided, use it but still increment number for uniqueness
+    CLEAN_TITLE=$(echo "$1" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g' | sed 's/--*/-/g' | sed 's/^-\|-$//g')
+    FILENAME="${CLEAN_TITLE}-${NEXT_NUM}.md"
+    TITLE="$1"
+fi
+
+FULL_PATH="${INBOX_DIR}/${FILENAME}"
+
+# Create inbox note template
+create_inbox_template() {
+    local datetime=$(date +"%Y-%m-%d %H:%M:%S")
+    
+    cat > "$FULL_PATH" << EOF
+# $TITLE
+
+**Created:** $datetime
+**Status:** 📥 Inbox
+
+## Notes
+
+
+---
+Tags: #inbox
+EOF
+}
+
+# Create the file
+create_inbox_template
+
+echo "📥 Created inbox note: $FILENAME"
+echo "📁 Path: $FULL_PATH"
+
+# Open in neovim
+nvim "$FULL_PATH" -c :ZenMode

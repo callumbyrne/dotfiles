@@ -1,0 +1,60 @@
+#!/bin/bash
+# daily-log - Create or open daily personal log
+# Usage: daily-log
+
+set -e
+
+DIRECTORY="${SECOND_BRAIN}/1_daily/personal"
+
+# Generate today's filename
+TODAY=$(date +"%Y-%m-%d")
+FILENAME="${TODAY}.md"
+FULL_PATH="${DIRECTORY}/${FILENAME}"
+
+# Ensure directory exists
+mkdir -p "${DIRECTORY}"
+
+# Check if file already exists
+if [[ -f "$FULL_PATH" ]]; then
+    echo "Daily log already exists: $FILENAME"
+    echo "Opening existing file..."
+    cd "$DIRECTORY" || exit 1
+    nvim "$FULL_PATH" -c :ZenMode
+    exit 0
+fi
+
+# Create daily log template
+create_daily_template() {
+    local date_formatted=$(date +"%B %d, %Y")
+    local datetime=$(date +"%Y-%m-%d %H:%M:%S")
+    
+    cat > "$FULL_PATH" << EOF
+# $date_formatted
+
+## How am I feeling?
+- 
+
+## What did I do today?
+
+
+## What do I want to do tommorrow?
+- 
+
+## Anything else?
+- 
+
+---
+Tags: #daily-note
+Created: $datetime
+EOF
+}
+
+# Create the file with template
+create_daily_template
+
+echo "✅ Created daily log: $FILENAME"
+echo "📁 Path: $FULL_PATH"
+
+# Open in neovim with cursor positioned after the first header
+cd "$DIRECTORY" || exit 1
+nvim "$FULL_PATH" -c :ZenMode
