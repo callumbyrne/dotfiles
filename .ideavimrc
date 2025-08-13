@@ -1,20 +1,30 @@
 let mapleader=" "
 
 """ Plugins  --------------------------------
-set ReplaceWithRegister
 set mini-ai
 set highlightedyank
 set commentary
 set NERDTree
 set which-key
+set noReplaceWithRegister
 
 """ Plugin settings -------------------------
 set notimeout
 let g:highlightedyank_highlight_duration = "100"
 
+""" Common settings -------------------------
+set so=5
+set incsearch
+set hlsearch
+set nu
+set clipboard+=unnamedplus
+
 """ My Mappings -----------------------------
-" Insert mode: jk to escape
 inoremap jk <Esc>
+nnoremap <Esc> :nohlsearch<CR>
+map gr <Action>(ShowUsages)
+map <leader>x <Action>(HideAllWindows):NERDTreeFocus<CR>
+map <A-h> <Action>(ActivateTerminalToolWindow)
 
 " Normal mode: scroll and search centering
 map <C-d> <C-d>zz
