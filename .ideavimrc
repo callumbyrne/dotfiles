@@ -1,0 +1,58 @@
+let mapleader=" "
+
+""" Plugins  --------------------------------
+set ReplaceWithRegister
+set mini-ai
+set highlightedyank
+set commentary
+set NERDTree
+set which-key
+
+""" Plugin settings -------------------------
+set notimeout
+let g:highlightedyank_highlight_duration = "100"
+
+""" My Mappings -----------------------------
+" Insert mode: jk to escape
+inoremap jk <Esc>
+
+" Normal mode: scroll and search centering
+map <C-d> <C-d>zz
+map <C-u> <C-u>zz
+map n nzzzv
+map N Nzzzv
+
+" NERDTree
+map <leader>e :NERDTreeFocus<CR>
+map <leader>E :NERDTreeToggle<CR>
+
+" Telescope-like mappings (mapped to IntelliJ actions where possible)
+map <leader>tg <Action>(FindInPath)
+map <leader>tb <Action>(RecentFiles)
+map <leader>tH <Action>(GotoAction)
+map <leader>tm <Action>(ShowBookmarks)
+map <leader>tr <Action>(RecentFiles)
+map <leader>tf <Action>(Find)
+map <leader>tt <Action>(GotoFile)
+map <leader>tw <Action>(FindWordAtCaret)
+map <leader>ts <Action>(FileStructurePopup)
+
+" Buffer management
+map <leader>bn <Action>(NewFile)
+map <leader>bd <Action>(CloseEditor)
+map <leader>ba <Action>(CloseAllEditors)
+
+map <S-h> <Action>(PreviousTab)
+map <S-l> <Action>(NextTab)
+
+" Visual mode: better indenting
+vnoremap < <gv
+vnoremap > >gv
+
+" Move lines
+map <A-j> :m .+1<CR>==
+map <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
