@@ -12,7 +12,7 @@ ZSH_THEME="robbyrussell"
 export NVM_LAZY_LOAD=true
 export NVM_LAZY_LOAD_EXTRA_COMMANDS=('nvim')
 export NVM_COMPLETION=true
-plugins=(zsh-nvm git)
+plugins=(zsh-nvm git direnv)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -86,6 +86,9 @@ alias e='exit'
 alias gp='git pull'
 alias gs='git status'
 alias lg='lazygit'
+
+# docker
+alias ld='lazydocker'
 
 # vim & second brain
 alias sb="cd \$SECOND_BRAIN"
