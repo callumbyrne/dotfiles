@@ -67,6 +67,9 @@ M.polish_hl = {
   syntax = {
     Comment = { italic = true },
     Type = { fg = M.base_30.teal },
+    PmenuSel = { bg = M.base_30.blue, fg = M.base_30.black },
+    CmpBorder = { fg = M.base_30.one_bg3 },
+    CmpDocBorder = { link = "CmpBorder" },
   },
 
   treesitter = {
