@@ -39,9 +39,7 @@ M.base_30 = {
   statusline_bg = "#e9e5de",
   lightbg = "#e9e5de",
   pmenu_bg = "#e9e5de",
-
-  -- THE FIX: NvimTree uses this variable for the folder text color.
-  folder_bg = "#75899b", -- Set to our readable blue color
+  folder_bg = "#717171",
 }
 
 -- Syntax Colors
