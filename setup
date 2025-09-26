@@ -15,6 +15,7 @@ ln -sf "$PWD/.inputrc" "$HOME"/.inputrc
 ln -sf "$PWD/.tmux.conf" "$HOME"/.tmux.conf
 ln -sf "$PWD/.ideavimrc" "$HOME"/.ideavimrc
 ln -sf "$PWD/nvim" "$XDG_CONFIG_HOME"/nvim
+ln -sf "$PWD/.claude" "$HOME"/.claude
 
 # fedora packages
 # sudo dnf install gcc libstdc++-devel unzip ripgrep fd lazygit
