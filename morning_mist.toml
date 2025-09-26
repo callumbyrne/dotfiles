@@ -1,0 +1,28 @@
+# Colors (Morning Mist Light)
+
+# Default colors
+[colors.primary]
+background = '#e9e5de'
+foreground = '#4f4a45'
+
+# Normal colors
+[colors.normal]
+black   = '#4f4a45'
+red     = '#d66868'
+green   = '#819b75'
+yellow  = '#d4a36a'
+blue    = '#75899b'
+magenta = '#ac78bd'
+cyan    = '#6e9a9d'
+white   = '#e9e5de'
+
+# Bright Colors
+[colors.bright]
+black   = '#4f4a45'
+red     = '#d66868'
+green   = '#819b75'
+yellow  = '#d4a36a'
+blue    = '#75899b'
+magenta = '#ac78bd'
+cyan    = '#6e9a9d'
+white   = '#e9e5de'
