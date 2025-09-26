@@ -37,7 +37,7 @@ x = 10
 y = 10
 
 [colors.cursor]
-cursor = "0xebdbb2"
+# cursor = "0xebdbb2"
 
 [keyboard]
 bindings = [
