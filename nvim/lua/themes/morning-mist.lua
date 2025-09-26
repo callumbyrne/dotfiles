@@ -70,6 +70,7 @@ M.polish_hl = {
     PmenuSel = { bg = M.base_30.blue, fg = M.base_30.black },
     CmpBorder = { fg = M.base_30.one_bg3 },
     CmpDocBorder = { link = "CmpBorder" },
+    LazyGitFloat = { bg = M.base_30.darker_black, fg = M.base_30.white },
   },
 
   treesitter = {
