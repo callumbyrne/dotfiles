@@ -69,4 +69,5 @@ echo "📥 Created inbox note: $FILENAME"
 echo "📁 Path: $FULL_PATH"
 
 # Open in neovim
+cd "$INBOX_DIR" || exit 1
 nvim "$FULL_PATH" -c :ZenMode
