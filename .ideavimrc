@@ -23,6 +23,7 @@ set clipboard+=unnamedplus
 inoremap jk <Esc>
 nnoremap <Esc> :nohlsearch<CR>
 map gr <Action>(ShowUsages)
+map gi <Action>(GotoImplementation)
 map <leader>x <Action>(HideAllWindows):NERDTreeFocus<CR>
 map <A-h> <Action>(ActivateTerminalToolWindow)
 
@@ -51,9 +52,15 @@ map <leader>ts <Action>(FileStructurePopup)
 map <leader>bn <Action>(NewFile)
 map <leader>bd <Action>(CloseEditor)
 map <leader>ba <Action>(CloseAllEditors)
+map <leader>br <Action>(CloseAllToTheRight)
+map <leader>bl <Action>(CloseAllToTheLeft)
+map <leader>bc <Action>(CloseAllEditorsButActive)
 
 map <S-h> <Action>(PreviousTab)
 map <S-l> <Action>(NextTab)
+
+" Git
+map <leader>gb <Action>(Annotate)
 
 " Visual mode: better indenting
 vnoremap < <gv
