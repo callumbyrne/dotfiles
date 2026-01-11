@@ -1,13 +1,17 @@
 return {
   {
     "neovim/nvim-lspconfig",
-    opts = {
-      servers = {
+    config = function()
+      local configs = require "nvchad.configs.lspconfig"
+
+      configs.defaults()
+
+      local servers = {
         html = {
           filetypes = { "html", "templ" },
         },
         cssls = {},
-        tsserver = {},
+        ts_ls = {},
         gopls = {},
         templ = {},
         htmx = {
@@ -36,21 +40,16 @@ return {
             vim.list_extend(config.settings.json.schemas, require("schemastore").json.schemas())
           end,
         },
-      },
-      -- This setup function will automatically apply the NvChad defaults
-      -- to every server listed above, removing the need for a manual loop.
-      setup = {
-        ["*"] = function(server_name, opts)
-          local configs = require "nvchad.configs.lspconfig"
+      }
 
-          opts.on_init = configs.on_init
-          opts.on_attach = configs.on_attach
-          opts.capabilities = configs.capabilities
-
-          -- Return false to let nvim-lspconfig continue with its own setup
-          return false
-        end,
-      },
-    },
+      for server_name, server_opts in pairs(servers) do
+        vim.lsp.config(server_name, vim.tbl_deep_extend("force", {
+          on_init = configs.on_init,
+          on_attach = configs.on_attach,
+          capabilities = configs.capabilities,
+        }, server_opts))
+        vim.lsp.enable(server_name)
+      end
+    end,
   },
 }
