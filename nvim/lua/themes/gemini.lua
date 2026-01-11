@@ -9,57 +9,57 @@ M.type = "light"
 
 -- UI Colors
 M.base_30 = {
-  white = "#4f4a45", -- Main foreground text
-  black = "#f4f1ea", -- Main background
-  darker_black = "#e9e5de", -- Darker bg shade
-  black2 = "#dcd7cd",
-  one_bg = "#dcd7cd", -- Darker bg shade 2
-  one_bg2 = "#dcd7cd",
-  one_bg3 = "#cec8be", -- Darker bg shade 3
-  grey = "#a19a92", -- Comments and subtle text
-  grey_fg = "#a19a92",
-  grey_fg2 = "#6d6660",
+  white = "#575b5f", -- Main foreground text
+  black = "#f0f4f9", -- usually your theme bg
+  darker_black = "#e1e5ea", -- 6% lighter than black
+  black2 = "#e1e5ea", -- 6% darker than black
+  one_bg = "#d8dbe0", -- 10% darker than black
+  one_bg2 = "#cbcfd6", -- 6% darker than one_bg
+  one_bg3 = "#bec3c9", -- 6% darker than one_bg2
+  grey = "#909299", -- 40% darker than black
+  grey_fg = "#82838a", -- 10% darker than grey
+  grey_fg2 = "#888990", -- 5% darker than grey
   light_grey = "#6d6660",
   red = "#c95f5f",
   baby_pink = "#c95f5f",
   pink = "#ac78bd",
-  line = "#e9e5de",
+  line = "#cdd1d6",
   green = "#819b75",
   vibrant_green = "#819b75",
   nord_blue = "#75899b",
   blue = "#75899b",
-  seablue = "#6e9a9d",
-  yellow = "#d4a36a",
-  sun = "#d4a36a",
+  seablue = "#575b5f",
+  yellow = "#575b5f",
+  sun = "#575b5f",
   purple = "#ac78bd",
   dark_purple = "#ac78bd",
-  teal = "#6e9a9d",
-  orange = "#c77f6a",
-  cyan = "#6e9a9d",
-  statusline_bg = "#e9e5de",
-  lightbg = "#e9e5de",
-  pmenu_bg = "#e9e5de",
+  teal = "#575b5f",
+  orange = "#575b5f",
+  cyan = "#575b5f",
+  statusline_bg = "#e1e5ea",
+  lightbg = "#e1e5ea",
+  pmenu_bg = "#e1e5ea",
   folder_bg = "#717171",
 }
 
 -- Syntax Colors
 M.base_16 = {
-  base00 = "#f4f1ea",
-  base01 = "#e9e5de",
-  base02 = "#dcd7cd",
+  base00 = "#f0f4f9",
+  base01 = "#e1e5ea",
+  base02 = "#d8dbe0",
   base03 = "#a19a92",
   base04 = "#6d6660",
-  base05 = "#4f4a45",
+  base05 = "#575b5f",
   base06 = "#3a3632",
   base07 = "#2e2b28",
-  base08 = "#c95f5f",
-  base09 = "#c77f6a",
-  base0A = "#d4a36a",
-  base0B = "#819b75",
-  base0C = "#6e9a9d",
-  base0D = "#75899b",
-  base0E = "#996b96",
-  base0F = "#c77f6a",
+  base08 = "#575b5f",
+  base09 = "#575b5f",
+  base0A = "#575b5f",
+  base0B = "#188038",
+  base0C = "#575b5f",
+  base0D = "#996900",
+  base0E = "#8430ce",
+  base0F = "#575b5f",
 }
 
 -- Optional overrides for fine-tuning
@@ -82,6 +82,6 @@ M.polish_hl = {
 }
 
 -- Allows users to override the theme from their chadrc.lua
-M = require("base46").override_theme(M, "morning_mist")
+M = require("base46").override_theme(M, "gemini")
 
 return M
