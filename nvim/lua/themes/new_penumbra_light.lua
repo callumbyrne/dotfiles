@@ -68,6 +68,13 @@ M.polish_hl = {
     Constant = { fg = M.base_30.red },
     Include = { fg = M.base_30.dark_purple },
   },
+
+  telescope = {
+    TelescopeSelection = { fg = M.base_30.white, bg = M.base_30.one_bg2 },
+    TelescopeSelectionCaret = { fg = M.base_30.blue, bg = M.base_30.one_bg2 },
+    TelescopeMultiSelection = { fg = M.base_30.white, bg = M.base_30.one_bg3 },
+    TelescopeMatching = { fg = M.base_30.orange },
+  },
 }
 
 M.type = "light"
