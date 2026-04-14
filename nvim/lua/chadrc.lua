@@ -6,7 +6,7 @@
 local M = {}
 
 M.base46 = {
-  theme = "new_penumbra_light",
+  theme = "zed_one_light",
 }
 
 M.ui = {
