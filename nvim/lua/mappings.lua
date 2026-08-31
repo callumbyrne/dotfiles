@@ -186,3 +186,8 @@ map("n", "<C-f>4", function() require("harpoon"):list():select(4) end)
 map("n", "<leader>gb", function() require("gitsigns").blame_line() end, {desc = "Blame line"})
 map("n", "<leader>gp", function() require("gitsigns").preview_hunk() end, {desc = "Preview hunk"})
 map("n", "<leader>gr", function() require("gitsigns").reset_hunk() end, {desc = "Reset hunk"})
+
+-- markdown preview
+map("n", "<leader>mp", "<cmd>MarkdownPreview<cr>", { desc = "Markdown: Start preview" })
+map("n", "<leader>ms", "<cmd>MarkdownPreviewStop<cr>", { desc = "Markdown: Stop preview" })
+map("n", "<leader>mr", "<cmd>MarkdownPreviewRefresh<cr>", { desc = "Markdown: Refresh preview" })
