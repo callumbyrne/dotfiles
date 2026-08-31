@@ -99,3 +99,14 @@ alias in="cd \$SECOND_BRAIN/0_inbox/"
 alias fp="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
 # search for a file with fzf and open it in vim
 alias vf='v $(fp)'
+
+# pnpm
+export PNPM_HOME="/home/callumbyrne/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+export PATH="/usr/local/bin:$PATH"
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
