@@ -1,0 +1,79 @@
+// ABOUTME: Zed keybindings mirroring the IdeaVim setup in .ideavimrc.
+// ABOUTME: Leader is space; groups are t=find, b=buffer, g=git, e=file tree.
+[
+  // jk leaves insert mode
+  {
+    "context": "Editor && vim_mode == insert && !menu",
+    "bindings": {
+      "j k": "vim::NormalBefore"
+    }
+  },
+
+  // Normal, visual and operator-pending
+  {
+    "context": "VimControl && !menu",
+    "bindings": {
+      "g r": "editor::FindAllReferences",
+      "g i": "editor::GoToImplementation",
+
+      // Scrolling and search leave the cursor centred
+      "ctrl-d": ["workspace::SendKeystrokes", "ctrl-d z z"],
+      "ctrl-u": ["workspace::SendKeystrokes", "ctrl-u z z"],
+      "n": ["workspace::SendKeystrokes", "n z z"],
+      "shift-n": ["workspace::SendKeystrokes", "shift-n z z"],
+
+      // Tabs
+      "shift-h": "pane::ActivatePreviousItem",
+      "shift-l": "pane::ActivateNextItem",
+
+      "alt-h": "terminal_panel::ToggleFocus",
+
+      // Clear the workspace back to the editor
+      "space x": "workspace::CloseAllDocks",
+
+      // File tree
+      "space e": "project_panel::ToggleFocus",
+      "space shift-e": "workspace::ToggleLeftDock",
+
+      // Find
+      "space t g": "pane::DeploySearch",
+      "space t w": ["workspace::SendKeystrokes", "v i w cmd-shift-f"],
+      "space t t": "file_finder::Toggle",
+      "space t r": "file_finder::Toggle",
+      "space t b": "tab_switcher::Toggle",
+      "space t f": "buffer_search::Deploy",
+      "space t s": "outline::Toggle",
+      "space t m": "vim::ToggleMarksView",
+      "space t shift-h": "command_palette::Toggle",
+
+      // Buffers
+      "space b n": "workspace::NewFile",
+      "space b d": "pane::CloseActiveItem",
+      "space b a": "pane::CloseAllItems",
+      "space b r": "pane::CloseItemsToTheRight",
+      "space b l": "pane::CloseItemsToTheLeft",
+      "space b c": "pane::CloseOtherItems",
+
+      // Git
+      "space g b": "editor::ToggleGitBlame"
+    }
+  },
+
+  // Indenting keeps the selection
+  {
+    "context": "vim_mode == visual",
+    "bindings": {
+      "<": ["workspace::SendKeystrokes", "< g v"],
+      ">": ["workspace::SendKeystrokes", "> g v"]
+    }
+  },
+
+  // Move lines in every mode
+  {
+    "context": "Editor",
+    "bindings": {
+      "alt-j": "editor::MoveLineDown",
+      "alt-k": "editor::MoveLineUp"
+    }
+  }
+]
