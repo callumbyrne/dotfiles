@@ -55,7 +55,7 @@
       "space b c": "pane::CloseOtherItems",
 
       // Git
-      "space g b": "editor::ToggleGitBlame"
+      "space g b": "git::Blame"
     }
   },
 
