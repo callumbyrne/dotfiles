@@ -1,0 +1,12 @@
+theme = Atom One Light
+
+font-size = 16
+
+font-style-bold = false
+font-style-bold-italic = false
+
+# Send control codes instead of the macOS shortcuts, for the keyboard layer
+# that maps command to control.
+keybind = cmd+c=text:\x03
+keybind = cmd+s=text:\x13
+keybind = cmd+f=text:\x06
