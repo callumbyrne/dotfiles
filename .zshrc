@@ -12,7 +12,7 @@ ZSH_THEME="robbyrussell"
 export NVM_LAZY_LOAD=true
 export NVM_LAZY_LOAD_EXTRA_COMMANDS=('nvim')
 export NVM_COMPLETION=true
-plugins=(zsh-nvm git direnv)
+plugins=(zsh-nvm git)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -108,5 +108,3 @@ case ":$PATH:" in
 esac
 # pnpm end
 export PATH="/usr/local/bin:$PATH"
-
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
