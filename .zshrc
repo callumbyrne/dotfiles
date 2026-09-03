@@ -25,14 +25,14 @@ export VISUAL=nvim
 export EDITOR=nvim
 
 # config
-export BROWSER="brave"
+export BROWSER="chrome"
 
 # directories
 export XDG_CONFIG_HOME="$HOME"/.config
 export REPOS="$HOME/repos"
 export DOTFILES="$REPOS/dotfiles"
 export SCRIPTS="$DOTFILES/scripts"
-export SECOND_BRAIN="$HOME/second-brain"
+export SECOND_BRAIN="$HOME/obsidian"
 
 # ~~~~~~~~~~~~~~~ Path ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -92,7 +92,7 @@ alias ld='lazydocker'
 
 # vim & second brain
 alias sb="cd \$SECOND_BRAIN"
-alias in="cd \$SECOND_BRAIN/0_inbox/"
+alias in="cd \$SECOND_BRAIN/00 Inbox/"
 
 # fzf aliases
 # use fp to do a fzf search and preview the files
