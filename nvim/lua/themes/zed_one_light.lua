@@ -36,27 +36,30 @@ M.base_30 = {
   folder_bg = "#6C6C6C",
 }
 
+-- Each slot names the Zed "One Light" syntax role it is drawn from.
 M.base_16 = {
-  base00 = "#fafafa",
+  base00 = "#fafafa", -- editor.background
   base01 = "#f4f4f4",
   base02 = "#e5e5e6",
   base03 = "#dfdfe0",
   base04 = "#d7d7d8",
-  base05 = "#383a42",
+  base05 = "#242529", -- editor.foreground, variable, namespace
   base06 = "#202227",
   base07 = "#090a0b",
-  base08 = "#d36151",
-  base09 = "#ad6e25",
-  base0A = "#c18401",
-  base0B = "#649f57",
-  base0C = "#3882b7",
-  base0D = "#5c78e2",
-  base0E = "#a449ab",
-  base0F = "#986801",
+  base08 = "#d3604f", -- property, variable.parameter
+  base09 = "#ad6e25", -- number, boolean, variable.special
+  base0A = "#3882b7", -- type, enum
+  base0B = "#649f57", -- string
+  base0C = "#5c78e2", -- constructor
+  base0D = "#5b79e3", -- function
+  base0E = "#a449ab", -- keyword, preproc
+  base0F = "#4d4f52", -- punctuation.bracket, punctuation.delimiter
 }
 
 M.type = "light"
 
+-- Zed splits some roles that Base46 shares between one slot, so the groups that
+-- would otherwise inherit the wrong slot are pinned to their Zed color here.
 M.polish_hl = {
   telescope = {
     TelescopePromptPrefix = { fg = M.base_30.white },
@@ -64,7 +67,39 @@ M.polish_hl = {
   },
 
   treesitter = {
-    ["@punctuation.bracket"] = { fg = M.base_30.nord_blue },
+    ["@module"] = { fg = M.base_16.base05 }, -- namespace
+    ["@operator"] = { fg = M.base_30.cyan }, -- operator
+    ["@constant"] = { fg = M.base_30.yellow }, -- constant
+
+    -- Zed paints every keyword flavour with the one purple.
+    ["@keyword.exception"] = { fg = M.base_16.base0E },
+    ["@keyword.repeat"] = { fg = M.base_16.base0E },
+    ["@keyword.storage"] = { fg = M.base_16.base0E },
+    ["@keyword.directive"] = { fg = M.base_16.base0E },
+
+    ["@tag"] = { fg = M.base_30.blue }, -- tag
+    ["@attribute"] = { fg = M.base_30.blue }, -- attribute
+
+    ["@string.escape"] = { fg = "#7c7e86" }, -- string.escape
+    ["@string.regex"] = { fg = M.base_30.orange }, -- string.regex
+
+    ["@comment"] = { fg = "#a2a3a7" }, -- comment
+    ["@comment.documentation"] = { fg = "#7c7e86" }, -- comment.doc
+
+    ["@markup.link.url"] = { fg = M.base_30.cyan, underline = true }, -- link_uri
+  },
+
+  syntax = {
+    Constant = { fg = M.base_30.yellow }, -- constant
+    Identifier = { fg = M.base_16.base05 }, -- variable
+    Label = { fg = M.base_30.blue }, -- label
+    Operator = { fg = M.base_30.cyan }, -- operator
+    PreProc = { fg = M.base_16.base0E }, -- preproc
+    Repeat = { fg = M.base_16.base0E }, -- keyword
+    Statement = { fg = M.base_16.base0E }, -- keyword
+    StorageClass = { fg = M.base_16.base0E }, -- keyword
+    Structure = { fg = M.base_16.base0A }, -- type
+    Tag = { fg = M.base_30.blue }, -- tag
   },
 
   defaults = {
