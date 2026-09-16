@@ -1,6 +1,9 @@
 theme = Atom One Light
 
-font-size = 16
+font-family = "Lilex"
+font-size = 15
+adjust-cell-height = 20%
+font-variation = wght=450
 
 font-style-bold = false
 font-style-bold-italic = false
@@ -10,3 +13,7 @@ font-style-bold-italic = false
 keybind = cmd+c=text:\x03
 keybind = cmd+s=text:\x13
 keybind = cmd+f=text:\x06
+
+macos-option-as-alt = true
+
+cursor-invert-fg-bg = true

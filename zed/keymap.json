@@ -55,7 +55,10 @@
       "space b c": "pane::CloseOtherItems",
 
       // Git
-      "space g b": "git::Blame"
+      "space g b": "git::Blame",
+
+      // Yank a file:line reference for the selection or cursor line
+      "space y": ["task::Spawn", { "task_name": "Copy code reference" }]
     }
   },
 
