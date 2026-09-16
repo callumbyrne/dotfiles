@@ -58,6 +58,9 @@ map('n', 'N', 'Nzzzv', { desc = 'Previous result' })
 -- Use jq to format JSON
 map('n', '<leader>jq', ':%!jq .<cr>', { desc = 'Format current buffer using JQ' })
 
+-- Yank a file:line reference for the selection or cursor line
+map({ "n", "x" }, "<leader>y", function() require("utils").copy_code_reference() end, { desc = "Copy code reference" })
+
 -- telescope
 map("n", "<leader>tg", "<cmd>Telescope live_grep<CR>", { desc = "Grep search" })
 map("n", "<leader>tb", "<cmd>Telescope buffers<CR>", { desc = "Find buffers" })
