@@ -1,193 +1,184 @@
-# Workplace Agent Skills
+# Workplace Agent Skills v4
 
-A small, composable engineering workflow for team-owned repositories.
+A lean skill set for using capable coding agents in established repositories without over-scaffolding them.
+
+The skills are not intended to teach frontier models how to write software. They exist to provide:
+
+- reusable workflow commands;
+- clean context boundaries between planning, implementation, and review;
+- a consistent local artifact protocol;
+- deliberate quality gates where the process matters more than raw model capability.
+
+The manual core workflow is:
+
+```text
+/explore WORK-ID
+    ↓
+shared understanding
+    ↓
+/handoff WORK-ID
+    ↓
+.work/active/WORK-ID/plan.md
+    ↓
+fresh context
+    ↓
+/implement WORK-ID
+    ↓
+fresh context
+    ↓
+/review WORK-ID
+```
+
+Not every task needs every phase. Use the minimum workflow necessary.
+
+For autonomous end-to-end delivery inside Herdr:
+
+```text
+/deliver WORK-ID <task>
+    ↓
+explore + human decisions when truly needed
+    ↓
+handoff
+    ↓
+fresh implementer
+    ↓
+fresh adversarial review
+    ↓
+fresh fix / re-review loops as needed
+    ↓
+branch ready for your final review
+```
 
 ## Skills
 
-- `explore` — investigate and discuss work without implementing it.
-- `plan` — capture an agreed approach as a concise, disposable implementation handoff.
-- `implement` — execute a clear ticket or approved plan without unnecessarily redesigning it.
-- `wayfind` — resolve decision-focused unknowns before planning large or fuzzy work.
-- `review` — perform a bounded adversarial review focused on concrete production-relevant defects.
+### `deliver`
+Herdr-based autonomous coordinator. Owns a task from exploration through handoff, fresh-context implementation, runtime verification, rigorous review/fix loops, and notification when the branch is ready for final human review. It coordinates workers but does not implement product code itself.
 
-## Local workspace
+### `explore`
+Understand the requested change with the user before coding. Inspect the repository, surface important unknowns, and keep material product/design decisions visible rather than silently making them.
 
-Temporary work artifacts live under a repo-local, normally gitignored `.work/` directory:
+### `handoff`
+Distill the current shared understanding into `.work/active/<work-id>/plan.md` so a fresh implementation context can execute without the original conversation.
+
+### `implement`
+Implement a normal feature/change. Automatically consumes `plan.md` when present and treats settled decisions as authoritative unless repository evidence materially contradicts them.
+
+### `bugfix`
+Evidence-first debugging. Reproduce the problem, establish root cause, make the smallest justified fix, and rerun the original reproduction.
+
+### `review`
+The strongest quality gate in the framework. A fresh, adversarial review that tries to find real defects that should block merge. Findings must be concrete and verified. Review is not artificially capped: it may iterate through fixes and re-review as many times as needed to reach a reliable result.
+
+### `architect`
+Optional design-only mode for important API, package, ownership, state, data-model, or concurrency decisions. Stops before implementation.
+
+### `create-verification`
+Create a repository-specific verification skill that teaches agents how to boot, exercise, observe, and clean up the real application or service.
+
+## Local work artifacts
+
+Use an ignored local directory:
 
 ```text
 .work/
-├── active/
-│   ├── DATA-421/
-│   │   ├── plan.md
-│   │   └── investigation.md     # optional
-│   └── auth-migration/
-│       ├── wayfind.md
-│       ├── investigations/      # optional parallel/deep research outputs
-│       └── plan.md              # appears when ready to implement
-└── archive/
+└── active/
+    └── WORK-ID/
+        ├── request.md         # autonomous delivery input
+        ├── plan.md
+        ├── investigation.md   # optional
+        ├── review.md          # when reviewed
+        └── state.json         # autonomous delivery recovery state
 ```
 
-Use a ticket identifier as `<work-id>` when one exists. Otherwise use a short, stable kebab-case slug.
+`.work/` should normally be added to the repository's local Git exclude file rather than committed.
 
-Recommended `.gitignore` entry:
+These are transient agent working-memory artifacts, not durable architecture documentation.
 
-```gitignore
-.work/
-```
+## Suggested usage
 
-The `.work/` directory is a local execution workspace, not durable project documentation.
-
-- `plan.md` is the canonical handoff from planning to implementation.
-- `investigation.md` is optional and only exists when exploration findings must survive a context boundary.
-- `wayfind.md` is the decision map for large/uncertain work.
-- `investigations/` contains optional detailed outputs from parallel scouts or deeper investigations.
-- completed workspaces may be moved from `active/` to `archive/`, or deleted.
-
-Durable architecture/domain knowledge belongs in the repository's normal docs or ADR process instead.
-
-## Suggested flow
+### Autonomous delivery with Herdr
 
 ```text
-incoming work
-    |
-    +-- clear + small --------------------> implement
-    |
-    +-- needs understanding --> explore
-                                  |
-                                  +-- clear + small --> implement
-                                  |
-                                  +-- agreed but handoff useful
-                                  |       |
-                                  |       +--> .work/active/<id>/plan.md
-                                  |                    |
-                                  |               fresh implementer
-                                  |
-                                  +-- still too undefined
-                                          |
-                                          +--> wayfind.md / investigations/
-                                                     |
-                                                     +--> plan.md
+/deliver DATA-123 Add the requested behavior from this ticket
 ```
 
-For multiple concurrent tasks, keep orchestration separate:
+`deliver` creates/reuses one task worktree, interrupts only for material decisions, uses fresh agents across implementation/review boundaries, requires real frontend functional verification when applicable, and stops with the branch ready for your final review. It does not merge or deploy.
+
+
+### Small obvious change
 
 ```text
-you <-> coordinator/orchestrator
-          |
-          +-- worker A -> explore/plan/implement
-          +-- worker B -> explore/plan/implement
-          +-- worker C -> wayfind investigation
+/implement DATA-123
+/review DATA-123
 ```
 
-The skills define **how engineering work is performed**. A tool such as Firstmate/Herdr can define **who runs which skill, in which worktree, and when**.
-
-## Artifact lifecycle
-
-A typical planned task:
+### Normal meaningful ticket
 
 ```text
-/explore DATA-421
-        |
-        | conversation; no file by default
-        v
-/plan
-        |
-        v
-.work/active/DATA-421/plan.md
-        |
-        | context boundary / fresh worker
-        v
-/implement DATA-421
-        |
-        v
-implementation + validation + review
-        |
-        +--> archive .work/active/DATA-421
-        |          to .work/archive/DATA-421
-        |
-        `--> or delete it
+/explore DATA-123
+/handoff DATA-123
+# start a fresh agent/context
+/implement DATA-123
+# start a fresh reviewer/context
+/review DATA-123
 ```
 
-A typical wayfinding task:
+### Bug
 
 ```text
-.work/active/<initiative>/wayfind.md
-          |
-          +--> investigations/a.md
-          +--> investigations/b.md
-          |
-          v
-      decisions resolved
-          |
-          v
-        plan.md
-          |
-          v
-      implementation
+/bugfix DATA-123
+/review DATA-123
 ```
 
-## Review lifecycle
-
-After implementation and normal project validation:
+### Design-heavy work
 
 ```text
-fresh adversarial reviewer
-        |
-        v
-    findings
-        |
-        v
-verify BLOCKER / IMPORTANT
-        |
-        +--> disproved -> discard
-        +--> human decision -> escalate
-        `--> confirmed -> fix worker
-                          |
-                          v
-                    one delta review
-                          |
-                          v
-                         stop
+/explore DATA-123
+/architect DATA-123
+/handoff DATA-123
+/implement DATA-123
+/review DATA-123
 ```
 
-Review artifacts live at:
+## Herdr
 
-```text
-.work/active/<work-id>/review.md
-```
+Herdr is the runtime/cockpit for autonomous `/deliver` workflows. The individual engineering skills remain orchestration-agnostic; `deliver` uses Herdr to provide worktree isolation, fresh agent contexts, lifecycle waiting, and recovery.
 
-The reviewer must describe concrete failure scenarios rather than generic concerns. The default process is deliberately bounded to avoid open-ended "review until zero findings" loops.
+Useful patterns can be invoked in plain language when needed:
 
-## Principles
+- **Arena** — several agents solve the same problem independently; compare the results.
+- **Swarm** — split independent investigations across agents and synthesize the findings.
 
-1. Use the minimum planning machinery necessary.
-2. Keep product tickets as the source of truth for product intent.
-3. Explore before planning when important context is missing.
-4. Plans record agreed decisions; they should not restart discovery.
-5. Plans are disposable execution artifacts unless they contain genuinely durable knowledge.
-6. Fresh implementation contexts are useful when a plan is acting as a handoff contract.
-7. Testing is expected where appropriate; TDD is not mandated.
-8. Workers escalate material conflicts instead of silently redesigning the work.
-9. Wayfinding produces decisions, not production implementation.
-10. Review is adversarial but bounded: prove concrete failure scenarios, verify findings, and stop after one delta re-review.
-11. Keep orchestration concerns out of the engineering skills themselves.
+These are orchestration patterns, not permanent skills in v4.
 
 ## Installation
 
-Copy each skill directory into the skills location used by your coding agent:
+Run:
 
-```text
-skills/
-  explore/
-    SKILL.md
-  plan/
-    SKILL.md
-  implement/
-    SKILL.md
-  wayfind/
-    SKILL.md
-  review/
-    SKILL.md
+```bash
+./scripts/install-claude.sh
 ```
 
-These files intentionally use only simple `name` and `description` frontmatter so they remain easy to adapt across agent environments.
+By default this installs into `~/.claude/skills/`.
+
+To install somewhere else:
+
+```bash
+./scripts/install-claude.sh /path/to/skills
+```
+
+## Design principle
+
+For every instruction, ask:
+
+> Would a strong coding model probably do this correctly from a normal request?
+
+If yes, it usually does not belong in a skill.
+
+Keep instructions that define:
+
+- a phase boundary;
+- an artifact or context-transfer contract;
+- a deliberate quality standard;
+- evidence requirements;
+- repository-specific procedures.
