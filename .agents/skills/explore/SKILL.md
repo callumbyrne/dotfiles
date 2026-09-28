@@ -1,162 +1,51 @@
 ---
 name: explore
-description: Investigate a ticket, feature, bug, or technical problem before implementation. Use to understand existing behavior, constraints, unknowns, and viable approaches without changing project code.
+description: Investigate a requested change with the user to reach a shared understanding before implementation. Use when the problem, current behavior, constraints, or important design decisions are not yet sufficiently understood.
 ---
 
 # Explore
 
-Act as an engineering thinking partner. Understand the work before deciding how to implement it.
+Understand the work before building it.
 
-Exploration is for **investigation and discussion, not implementation**.
+The goal is a **shared understanding with the user**, not a code change and not yet a formal implementation handoff.
 
-## Goals
+## Boundary
 
-- Understand what the ticket or request is actually asking for.
-- Ground the discussion in the current codebase and repository documentation.
-- Explain the relevant existing behavior and architecture.
-- Separate observed facts, assumptions, open questions, and decisions.
-- Identify constraints, dependencies, risks, and likely affected areas.
-- Compare viable approaches when a meaningful choice exists.
-- Reach enough shared understanding to either implement directly, create a plan, or wayfind further.
+During exploration:
 
-## Boundaries
+- inspect the repository and relevant behavior;
+- trace the current implementation far enough to understand the change;
+- identify important constraints, invariants, dependencies, and compatibility concerns;
+- distinguish verified facts from assumptions;
+- surface material product, architecture, API, data, security, migration, or scope decisions to the user;
+- make recommendations when useful, with the evidence behind them.
 
-By default:
+Do not modify production code.
+Do not silently make material decisions that the user should participate in.
+Do not continue into implementation.
 
-- Do not edit project source code.
-- Do not start implementing the requested change.
-- Do not create a plan artifact unless the user explicitly asks to plan or capture the agreed approach.
-- Do not turn every uncertainty into a question for the user. Investigate anything the repository can answer first.
-- Do not invent product requirements, acceptance criteria, or architectural constraints.
-- Do not broaden the scope simply because adjacent cleanup looks attractive.
+## Keep it conversational
 
-Read-only commands, searches, tests, logs, and other non-destructive investigation are allowed when useful.
+Default to discussing findings with the user rather than creating documents.
 
-## Temporary workspace
+Only persist an investigation when the work is large enough that important evidence would otherwise be lost or when multiple fresh agents will need the findings.
 
-The shared local workspace for disposable engineering artifacts is:
-
-```text
-.work/
-  active/
-  archive/
-```
-
-`.work/` should normally be gitignored.
-
-Exploration is conversational by default and should **not** create files merely to preserve a transcript.
-
-If investigation results need to survive the current context before a plan can be created, write only the useful findings to:
+When useful, write:
 
 ```text
 .work/active/<work-id>/investigation.md
 ```
 
-Use the ticket identifier when one exists (for example `DATA-421`). Otherwise use a short, stable kebab-case slug.
+Keep it compact and evidence-focused.
 
-`investigation.md` is optional and disposable. Do not create it when the conversation itself is sufficient.
+## Exit condition
 
-## Sources of truth
+Exploration is complete when:
 
-Use this precedence when reasoning:
+- the requested behavior is understood;
+- the relevant current behavior is understood;
+- important constraints are known;
+- material decisions have been surfaced and sufficiently settled;
+- a `/handoff` can produce a concise execution contract without reopening broad discovery.
 
-1. Explicit user instructions and current ticket requirements.
-2. Repository-local instructions and established team documentation.
-3. Existing code, tests, schemas, API contracts, and configuration.
-4. Relevant historical context such as nearby implementations or version-control history.
-5. Your own inference.
-
-If these sources conflict, surface the conflict rather than silently choosing one.
-
-## Process
-
-### 1. Orient
-
-Read the supplied ticket/request and the minimum repository guidance needed to work safely.
-
-Identify:
-
-- the user-visible or system-visible behavior being changed;
-- explicit acceptance criteria;
-- stated constraints;
-- terms or domain concepts that need grounding.
-
-### 2. Trace the current system
-
-Inspect the relevant path through the codebase.
-
-Prefer tracing behavior end-to-end over reading files broadly. Depending on the work, this may include:
-
-- entry points and handlers;
-- domain/service logic;
-- persistence or external integrations;
-- configuration and feature flags;
-- tests that encode current behavior;
-- error handling, telemetry, and background processing.
-
-Explain what matters. Do not dump a repository tour.
-
-### 3. Find the real decision points
-
-Classify findings as:
-
-- **Observed** — directly supported by the repository or supplied context.
-- **Assumed** — plausible but not yet verified.
-- **Open** — requires investigation or a human/product decision.
-- **Decided** — explicitly agreed during this exploration.
-
-Look especially for:
-
-- unclear requirements;
-- multiple plausible implementation approaches;
-- compatibility or migration concerns;
-- interactions with other in-flight work;
-- hidden operational constraints;
-- places where the requested behavior conflicts with existing patterns.
-
-### 4. Discuss options
-
-When there is a meaningful choice, present the smallest useful set of options.
-
-For each option, focus on trade-offs that matter to this codebase: complexity, consistency, migration cost, failure modes, observability, performance, operational risk, and future maintenance.
-
-Do not manufacture alternatives when one approach is clearly established by the repository.
-
-### 5. Converge
-
-As the discussion progresses, keep track of decisions already made. Do not repeatedly reopen settled points unless new evidence invalidates them.
-
-When enough is known, recommend one of:
-
-- **Implement directly** — the change is clear and small enough that another planning artifact would add little value.
-- **Plan** — the approach is agreed, but a disposable handoff/checklist would make implementation safer or allow a fresh worker/context.
-- **Wayfind** — important uncertainty remains and the work is too broad or interconnected to resolve as one exploration.
-
-If `investigation.md` exists and planning is next, treat it as supporting evidence rather than as the implementation contract. The plan should contain the decisions the implementer actually needs.
-
-## Output
-
-Keep the exploration conversational while work is ongoing.
-
-When asked to summarize, or when the exploration reaches a natural stopping point, use this shape:
-
-### Current understanding
-A concise explanation of the relevant current behavior and the requested change.
-
-### Key findings
-Only the findings that materially affect implementation.
-
-### Decisions
-Decisions explicitly agreed during the discussion.
-
-### Open questions
-Only unresolved questions that cannot reasonably be answered by further repository investigation.
-
-### Recommended next step
-`implement directly`, `plan`, or `wayfind`, with a brief reason.
-
-## Completion rule
-
-Exploration is complete when there is enough shared understanding to choose the next action.
-
-Do not continue investigating merely to make the exploration feel exhaustive.
+Stop there unless the user explicitly asks for another phase.
