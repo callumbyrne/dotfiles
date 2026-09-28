@@ -52,6 +52,8 @@ Examples:
 If you catch yourself writing "new", "old", "legacy", "wrapper", "unified", or implementation details in names or comments, STOP and find a better name that describes the thing's
 actual purpose.
 
+Comments on code MUST be used sparingly. Only add comments to code if the code would truly be hard to reason without it. If you do decide to add comments, make sure they are concise and too the point. 
+
 ## Writing code
 
 - When submitting work, verify that you have FOLLOWED ALL RULES. (See Rule #1)

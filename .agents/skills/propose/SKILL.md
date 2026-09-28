@@ -1,9 +1,9 @@
 ---
-name: plan
+name: propose
 description: Turn an understood ticket or completed exploration into a concise, disposable implementation plan. Use when decisions are settled enough for a fresh implementation context or worker to execute the change without reconstructing the discussion.
 ---
 
-# Plan
+# Propose
 
 Create the **execution handoff** for a change.
 

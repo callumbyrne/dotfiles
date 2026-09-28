@@ -10,9 +10,11 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 export NVM_LAZY_LOAD=true
-export NVM_LAZY_LOAD_EXTRA_COMMANDS=('nvim')
+export NVM_LAZY_LOAD_EXTRA_COMMANDS=('nvim','pnpm')
 export NVM_COMPLETION=true
-plugins=(zsh-nvm git)
+plugins=(zsh-nvm git zsh-autosuggestions)
+
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=7'
 
 source $ZSH/oh-my-zsh.sh
 
@@ -32,7 +34,11 @@ export XDG_CONFIG_HOME="$HOME"/.config
 export REPOS="$HOME/repos"
 export DOTFILES="$REPOS/dotfiles"
 export SCRIPTS="$DOTFILES/scripts"
-export SECOND_BRAIN="$HOME/obsidian"
+export SECOND_BRAIN="$REPOS/docs"
+
+export NO_MISTAKES_TELEMETRY=0
+export CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY=1
+export CLAUDE_CODE_AUTO_COMPACT_WINDOW=500000
 
 # ~~~~~~~~~~~~~~~ Path ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -92,7 +98,7 @@ alias ld='lazydocker'
 
 # vim & second brain
 alias sb="cd \$SECOND_BRAIN"
-alias in="cd \$SECOND_BRAIN/00 Inbox/"
+alias in="cd \$SECOND_BRAIN/0_inbox/"
 
 # fzf aliases
 # use fp to do a fzf search and preview the files
@@ -101,10 +107,10 @@ alias fp="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}
 alias vf='v $(fp)'
 
 # pnpm
-export PNPM_HOME="/home/callumbyrne/.local/share/pnpm"
+export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
-export PATH="/usr/local/bin:$PATH"
+# export PATH="/usr/local/bin:$PATH"
