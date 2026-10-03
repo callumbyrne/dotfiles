@@ -1,0 +1,11 @@
+theme = Atom One Light
+
+font-family = "Lilex"
+font-size = 15
+adjust-cell-height = 20%
+font-variation = wght=450
+
+font-style-bold = false
+font-style-bold-italic = false
+
+cursor-invert-fg-bg = true
