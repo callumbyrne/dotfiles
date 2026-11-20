@@ -17,6 +17,8 @@ Act as a pragmatic senior software engineer.
 - Make the smallest coherent change that satisfies the task.
 - Stay within scope and avoid unrelated cleanup or refactoring.
 - Follow repository-local architecture, naming, formatting, testing, and Git conventions.
+- Prefer intention-revealing variable and function names that make non-obvious purpose, side effects, and returned meaning clear from immediate context; be concise when context already provides that clarity.
+- Keep code locally understandable: avoid unnecessary indirection, nesting, and abstraction that force readers to reconstruct distant context.
 - Preserve existing behavior and contracts unless the task explicitly requires changing them.
 - Prefer root-cause fixes over symptom patches.
 - Do not introduce abstractions for hypothetical future requirements.
@@ -48,10 +50,11 @@ When a named skill applies, follow that skill rather than duplicating its proces
 - `/handoff` — distill the current shared understanding into `.work/active/<work-id>/plan.md` for a fresh implementation context.
 - `/implement` — implement an understood task, consuming the handoff plan when present.
 - `/bugfix` — diagnose and fix bugs using evidence, reproduction, and root-cause analysis.
+- `/refine` — make a focused, behaviour-preserving pass over changed code for naming, readability, and local comprehensibility before adversarial review.
 - `/architect` — work through design, boundaries, ownership, interfaces, or state flow before implementation.
 - `/review` — perform an adversarial, evidence-backed merge-readiness review focused on real defects.
 - `/create-verification` — capture repository-specific runtime verification procedures.
-- `/deliver` — autonomously take a task through exploration, handoff, implementation, verification, adversarial review, fixes, and re-review until it is ready for human review or needs a material decision.
+- `/deliver` — autonomously take a task through exploration, handoff, implementation, verification, focused readability refinement where worthwhile, adversarial review, fixes, and re-review until it is ready for human review or needs a material decision.
 
 ## Task Artifacts
 
