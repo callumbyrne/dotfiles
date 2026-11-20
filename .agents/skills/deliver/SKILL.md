@@ -1,6 +1,6 @@
 ---
 name: deliver
-description: Autonomously coordinate a work item from exploration through handoff, fresh-context implementation, rigorous adversarial review/fix loops, and runtime verification until the branch is ready for the user's final review. Use inside Herdr when the user wants end-to-end delivery with human interruption only for material decisions.
+description: Autonomously coordinate a work item from exploration through handoff, fresh-context implementation, focused readability refinement, rigorous adversarial review/fix loops, and runtime verification until the branch is ready for the user's final review. Use inside Herdr when the user wants end-to-end delivery with human interruption only for material decisions.
 ---
 
 # Deliver
@@ -18,6 +18,7 @@ user gives task
 → handoff artifact
 → fresh implementation context
 → runtime verification
+→ fresh readability refinement when worthwhile
 → fresh adversarial review
 → fresh fix contexts for confirmed findings
 → fresh re-review as many times as needed
@@ -71,6 +72,7 @@ All engineering workers for the task operate on that same checkout:
 ```text
 explorer/handoff   read-only except .work artifacts
 implementer        writes product code
+refiner            makes scoped readability edits, when worthwhile
 reviewer           read-only during review
 fixer              writes confirmed fixes
 next reviewer      read-only during review
@@ -118,6 +120,7 @@ Keep it small, for example:
   "work_id": "DATA-123",
   "phase": "review",
   "status": "running",
+  "refinement_status": "completed",
   "review_iteration": 2,
   "branch": "DATA-123",
   "worktree": "/path/to/worktree"
@@ -130,6 +133,7 @@ Useful `phase` values are:
 setup
 explore
 implement
+refine
 review
 fix
 ready_for_human_review
@@ -248,9 +252,29 @@ Use a repository verification skill, Playwright, or another organization-approve
 
 If no approved browser/runtime path is available and functional verification is important, treat that as a verification dependency and surface it to the user.
 
-## Phase 3 — Fresh adversarial review
+## Phase 3 — Fresh readability refinement
 
-Start a **new reviewer context** in the task worktree after implementation completes.
+After implementation and its validation, decide whether a separate `/refine` pass would add value.
+
+Use a **fresh refiner context in the same task worktree** for meaningful code changes, especially those with new functions, non-trivial transformations, complex conditionals, or new domain concepts. Skip this extra worker for small, obviously readable edits (for example, a one-line fix or a test fixture update) and record the skip in `state.json`.
+
+Give the refiner the work ID, task checkout, intended base, and `/refine` invocation **without pasting the plan, implementation notes, or implementation rationale into its initial prompt**. The refiner must first read the diff cold, using relevant repository conventions, and note potential comprehension barriers. Only after that first independent read should it consult the task request, `plan.md` when present, and surrounding code/contracts to verify concerns and make safe changes. Naming is the priority, but meaningful local reorganisation is allowed when it improves comprehension more than a rename; cosmetic restructuring is not.
+
+Instruct it to run:
+
+```text
+/refine <work-id>
+```
+
+Its independent cold-reader objective is: improve confusing identifiers and local reasoning with **small, behaviour-preserving edits**. It may change code, but must not redesign the task, refactor unrelated code, change contracts, or produce an open-ended style wish list. A legitimate result is **no changes needed**.
+
+The refiner owns focused validation after any edits. Check its settled result and validation before proceeding. If its edits break checks, have the refiner fix or revert those edits; do not send a known refinement regression into `/review`. Where refinement could change runtime behaviour, repeat appropriate runtime checks when practical. The independent reviewer will still verify the final code.
+
+Do not introduce a new `.work/` artifact, readability score, or iterative style/fix loop. Record `refinement_status` as `completed` or `skipped` in `state.json` for recovery; after this phase, correctness defects belong to `/review`, not `/refine`.
+
+## Phase 4 — Fresh adversarial review
+
+Start a **new reviewer context** in the task worktree after implementation and any required refinement/validation have settled.
 
 Instruct it to read:
 
@@ -296,7 +320,7 @@ Start a **fresh fixer agent** in the task worktree. Give it:
 
 Its contract is:
 
-1. fix the confirmed defects without opportunistic redesign;
+1. fix the confirmed defects without opportunistic redesign, preserving descriptive names and straightforward structure;
 2. rerun the reproductions/evidence that demonstrated the defects when practical;
 3. run appropriate focused and repository validation;
 4. report completion;
@@ -335,7 +359,7 @@ Run the installed Herdr command help rather than embedding assumptions about a p
 
 A worker reaching idle is not sufficient proof of phase success: also check the expected artifact, Git state, validation result, or review verdict.
 
-Do not reuse an implementation agent as the reviewer.
+Do not reuse an implementation or refinement agent as the reviewer.
 Do not reuse a fixer as the next reviewer.
 
 ## Failure and recovery
@@ -353,8 +377,9 @@ If `/deliver <work-id>` is invoked again and state already exists, resume from t
 Examples:
 
 - `plan.md` exists but no implementation diff/validation → resume implementation;
-- implementation exists but no reliable review verdict → start review;
-- `review.md` says CHANGES REQUIRED → continue fix/re-review;
+- implementation exists but no reliable review verdict → complete or intentionally skip refinement first, then start review;
+- `refinement_status` is absent or untrustworthy before first review → reassess refinement; do not rely on stale metadata;
+- `review.md` says CHANGES REQUIRED → continue fix/re-review, without restarting cosmetic refinement;
 - `review.md` says PASS but the branch changed afterward → review again;
 - state says PASS but evidence/artifacts disagree → trust current repository evidence, not stale state.
 
@@ -365,7 +390,8 @@ Before notifying the user, verify:
 - `request.md` exists;
 - the handoff exists when the task required one;
 - implementation is present on the task branch;
-- relevant automated validation passed, or any accepted limitation is explicit;
+- relevant automated validation passed on the final refined/fixed code, or any accepted limitation is explicit;
+- refinement was completed or intentionally skipped before the initial review;
 - required runtime verification passed;
 - frontend/UI functionality was independently exercised during review when applicable;
 - `review.md` currently says `PASS`;
@@ -387,6 +413,7 @@ and notify the user concisely with:
 - work ID and branch;
 - what was implemented;
 - validation/runtime verification performed;
+- meaningful readability improvements when present;
 - review outcome and number/nature of fix cycles when useful;
 - any non-blocking limitations worth knowing;
 - confirmation that the branch is ready for **their final review**.
@@ -395,4 +422,4 @@ Do not describe the task as merged or complete beyond that boundary.
 
 ## Completion standard
 
-`/deliver` is complete when the branch has survived implementation verification and the independent `/review` process reports PASS for the current code, with all material human decisions resolved, and the user has been notified that it is ready for final review.
+`/deliver` is complete when the branch has survived implementation/refinement verification and the independent `/review` process reports PASS for the current code, with all material human decisions resolved, and the user has been notified that it is ready for final review.

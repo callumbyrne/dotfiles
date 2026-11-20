@@ -1,4 +1,4 @@
-# Workplace Agent Skills v4
+# Workplace Agent Skills v6
 
 A lean skill set for using capable coding agents in established repositories without over-scaffolding them.
 
@@ -24,7 +24,9 @@ fresh context
     ↓
 /implement WORK-ID
     ↓
-fresh context
+/refine WORK-ID           # optional; fresh context for meaningful code changes
+    ↓
+fresh reviewer context
     ↓
 /review WORK-ID
 ```
@@ -41,6 +43,8 @@ explore + human decisions when truly needed
 handoff
     ↓
 fresh implementer
+    ↓
+fresh readability refinement (when worthwhile)
     ↓
 fresh adversarial review
     ↓
@@ -62,6 +66,9 @@ Distill the current shared understanding into `.work/active/<work-id>/plan.md` s
 
 ### `implement`
 Implement a normal feature/change. Automatically consumes `plan.md` when present and treats settled decisions as authoritative unless repository evidence materially contradicts them.
+
+### `refine`
+Focused readability pass with an independent cold first read (before the plan or implementer notes), followed by context-aware, behaviour-preserving edits. Prioritises descriptive names, but permits proportionate local reorganisation when it meaningfully reduces comprehension effort. Makes no changes when the code is already understandable.
 
 ### `bugfix`
 Evidence-first debugging. Reproduce the problem, establish root cause, make the smallest justified fix, and rerun the original reproduction.
@@ -102,7 +109,7 @@ These are transient agent working-memory artifacts, not durable architecture doc
 /deliver DATA-123 Add the requested behavior from this ticket
 ```
 
-`deliver` creates/reuses one task worktree, interrupts only for material decisions, uses fresh agents across implementation/review boundaries, requires real frontend functional verification when applicable, and stops with the branch ready for your final review. It does not merge or deploy.
+`deliver` creates/reuses one task worktree, interrupts only for material decisions, uses fresh agents for meaningful readability refinement and adversarial correctness review, requires real frontend functional verification when applicable, and stops with the branch ready for your final review. The refiner first reads the diff without the plan or implementer notes, then consults context before making safe changes. It skips the extra refinement worker for trivial readable changes. It does not merge or deploy.
 
 
 ### Small obvious change
@@ -119,6 +126,8 @@ These are transient agent working-memory artifacts, not durable architecture doc
 /handoff DATA-123
 # start a fresh agent/context
 /implement DATA-123
+# start a fresh refiner/context, when useful
+/refine DATA-123
 # start a fresh reviewer/context
 /review DATA-123
 ```
@@ -149,7 +158,7 @@ Useful patterns can be invoked in plain language when needed:
 - **Arena** — several agents solve the same problem independently; compare the results.
 - **Swarm** — split independent investigations across agents and synthesize the findings.
 
-These are orchestration patterns, not permanent skills in v4.
+These are orchestration patterns, not permanent skills in v6.
 
 ## Installation
 
@@ -159,13 +168,15 @@ Run:
 ./scripts/install-claude.sh
 ```
 
-By default this installs into `~/.claude/skills/`.
+By default this installs into `~/.claude/skills/`. The installer replaces the named skill folders in that destination (it does not touch other skill folders). Restart the Claude session to pick up the installed skills.
 
 To install somewhere else:
 
 ```bash
 ./scripts/install-claude.sh /path/to/skills
 ```
+
+The optional **`global/CLAUDE.md`** is an updated version of the previously shared global instructions. It includes the new naming/readability principle and `/refine` skill. The installer deliberately **does not overwrite** `~/.claude/CLAUDE.md`: compare and merge those changes into your actual global instructions to preserve any local customisations.
 
 ## Design principle
 

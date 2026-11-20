@@ -10,6 +10,7 @@ SKILLS=(
   handoff
   implement
   bugfix
+  refine
   review
   architect
   create-verification
