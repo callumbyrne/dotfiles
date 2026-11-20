@@ -17,3 +17,5 @@ keybind = cmd+f=text:\x06
 macos-option-as-alt = true
 
 cursor-invert-fg-bg = true
+
+mouse-scroll-multiplier = 0.5
