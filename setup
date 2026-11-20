@@ -16,6 +16,8 @@ ln -sf "$PWD/.tmux.conf" "$HOME"/.tmux.conf
 ln -sf "$PWD/.ideavimrc" "$HOME"/.ideavimrc
 ln -sf "$PWD/nvim" "$XDG_CONFIG_HOME"/nvim
 ln -sf "$PWD/.claude" "$HOME"/.claude
+ln -sf "$PWD/ghostty/config.ghostty" "$XDG_CONFIG_HOME"/ghostty/config.ghostty
+ln -sf "$PWD/herdr/config.toml" "$XDG_CONFIG_HOME"/herdr/config.toml
 
 # fedora packages
 # sudo dnf install gcc libstdc++-devel unzip ripgrep fd lazygit
