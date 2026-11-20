@@ -16,7 +16,19 @@ return {
     vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
       group = lint_augroup,
       callback = function()
-        lint.try_lint(nil, { ignore_errors = true })
+        -- Run from the nearest eslint config dir so eslint_d uses the project's
+        -- eslint (monorepo apps) instead of falling back to its bundled version.
+        lint.try_lint(nil, {
+          ignore_errors = true,
+          cwd = vim.fs.root(0, {
+            "eslint.config.js",
+            "eslint.config.mjs",
+            "eslint.config.cjs",
+            "eslint.config.ts",
+            "eslint.config.mts",
+            "eslint.config.cts",
+          }),
+        })
       end,
     })
   end,

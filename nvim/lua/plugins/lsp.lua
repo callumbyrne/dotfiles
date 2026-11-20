@@ -12,6 +12,8 @@ return {
         },
         cssls = {},
         ts_ls = {},
+        -- Only attaches in projects with a biome.json(c).
+        biome = {},
         gopls = {},
         templ = {},
         htmx = {

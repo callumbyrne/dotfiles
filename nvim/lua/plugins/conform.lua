@@ -2,22 +2,34 @@ return {
   "stevearc/conform.nvim",
   event = "BufWritePre", -- uncomment for format on save
   config = function()
+    -- Biome in projects with a biome config, prettier everywhere else.
+    local biome_or_prettier = { "biome-check", "prettier", stop_after_first = true }
+
     local options = {
       formatters_by_ft = {
         lua = { "stylua" },
-        css = { "prettier" },
+        css = biome_or_prettier,
         html = { "prettier" },
         templ = { "templ" },
-        javascript = { "prettier" },
-        javascriptreact = { "prettier" },
-        typescript = { "prettier" },
-        typescriptreact = { "prettier" },
-        json = { "prettier" },
-        jsonc = { "prettier" },
+        javascript = biome_or_prettier,
+        javascriptreact = biome_or_prettier,
+        typescript = biome_or_prettier,
+        typescriptreact = biome_or_prettier,
+        json = biome_or_prettier,
+        jsonc = biome_or_prettier,
         yaml = { "prettier" },
         markdown = { "prettier" },
         ["markdown.mdx"] = { "prettier" },
         go = { "goimports", "gofumpt" },
+      },
+
+      formatters = {
+        -- Only treat biome as available when a biome.json(c) is found.
+        -- Formats and organizes imports, but doesn't apply lint fixes.
+        ["biome-check"] = {
+          require_cwd = true,
+          append_args = { "--linter-enabled=false" },
+        },
       },
 
       format_on_save = function(bufnr)
